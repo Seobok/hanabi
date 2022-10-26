@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "460356904849",
+    "project_id": "hanabi-ea7e9",
+    "storage_bucket": "hanabi-ea7e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460356904849:android:86d0f26fae42bd8bdf5c30",
+        "android_client_info": {
+          "package_name": "com.example.hanabi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460356904849-niml8gfb390cinj9i4caeuisebdkucji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanabi",
+            "certificate_hash": "26c03bea31c38e4962e8d159856ae4c230a49295"
+          }
+        },
+        {
+          "client_id": "460356904849-tc5kspdfgc9h53omthvageh0nfp6f25q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKinrltjeNzDRNcakcRLH0YQWvh9DSTKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460356904849-tc5kspdfgc9h53omthvageh0nfp6f25q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
