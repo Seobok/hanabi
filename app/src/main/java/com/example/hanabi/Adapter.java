@@ -1,6 +1,7 @@
 package com.example.hanabi;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<ViewHolder> {
-    public ArrayList<String> roomNameList, roomInfoList;
+    public ArrayList<Room> roomList = new ArrayList<>();;
 
     @NonNull
     @Override
@@ -27,21 +28,22 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String roomName = roomNameList.get(position);
-        String roomInfo = roomInfoList.get(position);
-        holder.roomName.setText(roomName);
-        holder.roomInfo.setText(roomInfo);
+        Room room = roomList.get(position);
+        holder.roomName.setText(room.title);
+        holder.roomInfo.setText(room.numberOfPlayer);
 
         holder.enterRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(room.numberOfPlayer.equals("3"))
+                    return;
+                Log.d("RoomListActivity", "click room" + holder.getAdapterPosition());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return roomInfoList.size();
+        return roomList.size();
     }
 }

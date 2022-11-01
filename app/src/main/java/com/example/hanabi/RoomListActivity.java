@@ -1,10 +1,16 @@
 package com.example.hanabi;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,9 +41,6 @@ public class RoomListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room_list);
 
-        adapter.roomNameList = new ArrayList<>();
-        adapter.roomInfoList = new ArrayList<>();
-
         recyclerView = (RecyclerView) findViewById(R.id.roomList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
@@ -52,10 +55,42 @@ public class RoomListActivity extends Activity {
         createRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG , firebaseUser.getEmail());
+                Room temp = new Room();
 
-                adapter.roomNameList.add("testName");
-                adapter.roomInfoList.add("testInfo");
+                View dialogView = View.inflate(RoomListActivity.this, R.layout.dialog_make_room, null);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(RoomListActivity.this);
+
+                EditText roomName = dialogView.findViewById(R.id.createRoom_roomName);
+                EditText roomPassword = dialogView.findViewById(R.id.createRoom_roomPassword);
+                Button OkBtn = dialogView.findViewById(R.id.createRoom_OKBtn);
+
+                dlg.setView(dialogView);
+                Dialog dialog = dlg.create();
+
+                OkBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String title = roomName.getText().toString();
+                        if(!(title.isEmpty() || title.equals(""))) {
+                            String password = roomPassword.getText().toString();
+
+                            temp.title = title;
+                            temp.password = password;
+                            temp.numberOfPlayer = "1";
+
+                            adapter.roomList.add(temp);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "방 제목을 입력하세요", Toast.LENGTH_SHORT).show();
+                        }
+                        //TODO 게임 대기실로 이동
+                        dialog.cancel();
+                    }
+                });
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                dialog.show();
+
                 adapter.notifyDataSetChanged();
             }
         });
