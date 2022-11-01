@@ -11,7 +11,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/newUserTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="회원가입"
@@ -19,7 +19,7 @@
         android:textSize="50sp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/newEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -28,7 +28,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/newPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -37,7 +37,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/newPassword2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -52,7 +52,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/createUserButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="회원가입" />
