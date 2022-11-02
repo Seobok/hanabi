@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private DatabaseReference mDatabase;
-    Button signup, loginBtn;
+    Button signup, loginBtn, firebaseTest;
     EditText emailText, passwordText;
     FirebaseAuth firebaseAuth;
 
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         signup = (Button) findViewById(R.id.signup);
         loginBtn = (Button) findViewById(R.id.loginBtn);
@@ -82,10 +81,23 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
-
             }
         });
 
+        firebaseTest = (Button) findViewById(R.id.FirebaseTest);
+        firebaseTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://hanabi-ea7e9-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                DatabaseReference ref = database.getReference();
+
+                ref.setValue("test").addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "success");
+                    }
+                });
+            }
+        });
     }
 }

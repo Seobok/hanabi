@@ -28,10 +28,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".CreateUserActivity"
-            android:label="회원가입"
-            />
+        <activity android:name=".CreateUserActivity"/>
         <activity android:name=".RoomListActivity"/>
 
     </application>

@@ -63,19 +63,6 @@ public class CreateUserActivity extends Activity {
                                     if (task.isSuccessful()) {
                                         Log.d(TAG, "createUserWithEmail:success");
 
-                                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                                        String currentUserEmail = user.getEmail();
-                                        String currentUserUid = user.getUid();
-
-                                        HashMap<Object, String> hashMap = new HashMap<>();
-
-                                        hashMap.put("uid", currentUserUid);
-                                        hashMap.put("id", currentUserEmail);
-
-                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                        DatabaseReference reference = database.getReference("Users");
-                                        reference.child(currentUserUid).setValue(hashMap);
-
                                         Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
                                         startActivity(intent);
                                         finish();
