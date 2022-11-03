@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,7 @@ public class RoomListActivity extends Activity {
 
     private static final String TAG = "RoomListActivity";
 
-    DatabaseReference gameRef, indexRef;
+    DatabaseReference gameRef, indexRef, updateRef;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
 
@@ -40,7 +41,7 @@ public class RoomListActivity extends Activity {
 
     Button createRoomBtn;
 
-    int index=0;
+    int index;
     String id;
 
     @Override
@@ -67,6 +68,60 @@ public class RoomListActivity extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 index = snapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        updateRef = firebaseDatabase.getReference("Room");
+
+        updateRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Room room = snapshot.getValue(Room.class);
+                if(room == null) return;
+                room.roomNumber = snapshot.getKey();
+                adapter.roomList.add(room);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Room room = snapshot.getValue(Room.class);
+
+                if(room.isGameStart.equals("true")) {
+                    onChildRemoved(snapshot);
+                }
+
+                room.roomNumber = snapshot.getKey();
+                for(int i =0; i<adapter.roomList.size();i++) {
+                    if(adapter.roomList.get(i).roomNumber.equals(room.roomNumber)) {
+                        adapter.roomList.set(i,room);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                Room room = snapshot.getValue(Room.class);
+
+                room.roomNumber = snapshot.getKey();
+                for(int i = 0; i < adapter.roomList.size(); i++){
+                    if (adapter.roomList.get(i).roomNumber.equals(room.roomNumber)){
+                        adapter.roomList.remove(i);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
@@ -118,9 +173,9 @@ public class RoomListActivity extends Activity {
                             Log.d(TAG,newRoom.toString());
 
                             gameRef.setValue(newRoom);
-                            adapter.roomList.add(temp);
+                            //adapter.roomList.add(temp);
 
-                            indexRef.setValue(index++);
+                            indexRef.setValue(++index);
                         } else {
                             Toast.makeText(getApplicationContext(), "방 제목을 입력하세요", Toast.LENGTH_SHORT).show();
                         }
@@ -137,5 +192,7 @@ public class RoomListActivity extends Activity {
                 adapter.notifyDataSetChanged();
             }
         });
+
+        adapter.notifyDataSetChanged();
     }
 }
