@@ -32,7 +32,7 @@ public class RoomListActivity extends Activity {
 
     private static final String TAG = "RoomListActivity";
 
-    DatabaseReference gameRef, indexRef, updateRef;
+    DatabaseReference gameRef, indexRef, updateRef, userRef;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
 
@@ -82,9 +82,13 @@ public class RoomListActivity extends Activity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Room room = snapshot.getValue(Room.class);
-                if(room == null) return;
+                if(room == null) {
+                    Log.d("TAG","updateRef addListener roomIsNULL");
+                    return;
+                }
                 room.roomNumber = snapshot.getKey();
                 adapter.roomList.add(room);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -163,22 +167,25 @@ public class RoomListActivity extends Activity {
                             newRoom.put("roomNumber", Integer.toString(index));
                             newRoom.put("isGameStart", "false");
 
-                            temp.title = title;
-                            temp.password = password;
-                            temp.numberOfPlayer = "1";
-                            temp.roomMasterId = id;
-                            temp.roomNumber = Integer.toString(index);
-                            temp.isGameStart = "false";
-
                             Log.d(TAG,newRoom.toString());
 
                             gameRef.setValue(newRoom);
-                            //adapter.roomList.add(temp);
 
                             indexRef.setValue(++index);
                         } else {
                             Toast.makeText(getApplicationContext(), "방 제목을 입력하세요", Toast.LENGTH_SHORT).show();
                         }
+
+                        userRef = gameRef.child("User");
+
+                        Hashtable<String,String> newUser = new Hashtable<>();
+                        newUser.put("p1", id);
+                        newUser.put("p2", "대기중");
+                        newUser.put("p3", "대기중");
+                        newUser.put("p2Ready", "false");
+                        newUser.put("p3Ready", "false");
+
+                        userRef.setValue(newUser);
 
                         //TODO 게임 대기실로 이동
                         dialog.cancel();

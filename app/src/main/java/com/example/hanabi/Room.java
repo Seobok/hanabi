@@ -7,5 +7,4 @@ public class Room {
     public String roomNumber;              // 방 번호
     public String title;                   // 방 제목
     public String isGameStart;             // 게임 시작 했는지
-    public Room(){}
 }
