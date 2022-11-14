@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.hanabi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class InGameActivity extends AppCompatActivity {
 
     card_info[] left_card = new card_info[5] ;
     card_info[] right_card = new card_info[5] ;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.in_game);
 
         temp_string = color_array[ 1 ] + "1" ;
 
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (view.getId()) {
                     case R.id.step3_number_1:
                         card_num = 1 ;
-                         break ;
+                        break ;
                     case R.id.step3_number_2:
                         card_num = 2 ;
                         break ;

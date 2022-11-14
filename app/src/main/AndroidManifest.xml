@@ -30,6 +30,7 @@
         </activity>
         <activity android:name=".CreateUserActivity"/>
         <activity android:name=".RoomListActivity"/>
+        <activity android:name=".InGameActivity"/>
 
     </application>
 
