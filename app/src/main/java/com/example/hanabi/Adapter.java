@@ -3,6 +3,7 @@ package com.example.hanabi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -26,14 +27,16 @@ import java.util.ArrayList;
 public class Adapter extends RecyclerView.Adapter<ViewHolder> {
     public ArrayList<Room> roomList = new ArrayList<>();;
 
+    Context parentContext;
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        parentContext = parent.getContext();
+        LayoutInflater inflater= (LayoutInflater) parentContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.recycler_view_item, parent,false);
 
-        ViewHolder viewHolder = new ViewHolder(context, view);
+        ViewHolder viewHolder = new ViewHolder(parentContext, view);
 
         return viewHolder;
     }
@@ -94,7 +97,11 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
 
                             dialog.cancel();
 
-                            //TODO 게임 대기실로 이동
+                            //TODO 게임 대기실로 이동 TEST 필요!!!
+
+                            Intent intent = new Intent(parentContext, InGameActivity.class);
+                            intent.putExtra("RoomNum", room.roomNumber);
+                            parentContext.startActivity(intent);
                         }
                     }
                 });

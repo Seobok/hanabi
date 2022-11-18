@@ -1,5 +1,7 @@
 package com.example.hanabi;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.Image;
@@ -9,10 +11,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
 public class InGameActivity extends AppCompatActivity {
+
+    FirebaseDatabase firebaseDatabase;
+    FirebaseUser firebaseUser;
+    DatabaseReference userRef, boardRef, roomRef;
+
+    String id;
+    String roomID;
 
     card_info[] left_card = new card_info[5] ;
     card_info[] right_card = new card_info[5] ;
@@ -74,6 +91,20 @@ public class InGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_game);
+
+        // <-- firebase initialize
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance("https://hanabi-ea7e9-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        roomID = getIntent().getStringExtra("RoomNum");
+        roomRef = firebaseDatabase.getReference("Room").child(roomID);
+        userRef = roomRef.child("User");
+        boardRef = roomRef.child("Board");
+        // -->
+
+        //<-- get current player id
+        String[] email = firebaseUser.getEmail().split("@",2);
+        id = email[0];
+        //-->
 
         temp_string = color_array[ 1 ] + "1" ;
 

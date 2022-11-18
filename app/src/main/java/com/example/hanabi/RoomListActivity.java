@@ -3,6 +3,7 @@ package com.example.hanabi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class RoomListActivity extends Activity {
 
     private static final String TAG = "RoomListActivity";
 
-    DatabaseReference gameRef, indexRef, updateRef, userRef;
+    DatabaseReference gameRef, indexRef, updateRef, userRef, cardRef;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
 
@@ -48,6 +49,8 @@ public class RoomListActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room_list);
+
+        Log.d("TAG", getApplicationContext().toString());
 
         recyclerView = (RecyclerView) findViewById(R.id.roomList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
@@ -187,7 +190,48 @@ public class RoomListActivity extends Activity {
 
                         userRef.setValue(newUser);
 
-                        //TODO 게임 대기실로 이동
+                        for(int i=0;i<50;i++) {
+                            cardRef = gameRef.child("Board").child(Integer.toString(i));
+                            Hashtable<String,String> newCard = new Hashtable<>();
+
+                            String color;
+                            if(i<10)
+                                color = "red";
+                            else if (i<20)
+                                color = "blue";
+                            else if (i<30)
+                                color = "white";
+                            else if (i<40)
+                                color = "yellow";
+                            else
+                                color = "green";
+                            newCard.put("color", color);
+
+                            String number;
+                            if(0 <= (i%10) && (i%10) <= 2)
+                                number = "1";
+                            else if (3 <= (i%10) && (i%10) <= 4)
+                                number = "2";
+                            else if (5 <= (i%10) && (i%10) <= 6)
+                                number = "3";
+                            else if (7 <= (i%10) && (i%10) <= 8)
+                                number = "4";
+                            else
+                                number = "5";
+                            newCard.put("number", number);
+
+                            newCard.put("position", "deck");
+                            newCard.put("handPosition", "");
+
+                            cardRef.setValue(newCard);
+                        }
+
+                        // <-- 대기실로 이동
+                        Intent intent = new Intent(getApplicationContext(), InGameActivity.class);
+                        intent.putExtra("RoomNum", Integer.toString(index));
+                        startActivity(intent);
+                        // -->
+
                         dialog.cancel();
                     }
                 });
