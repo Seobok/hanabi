@@ -31,6 +31,8 @@ public class InGameActivity extends AppCompatActivity {
     String id;
     String roomID;
 
+    Card[] cardList = new Card[50];
+
     card_info[] left_card = new card_info[5] ;
     card_info[] right_card = new card_info[5] ;
     card_info[] new_card = new card_info[5] ;
@@ -86,6 +88,40 @@ public class InGameActivity extends AppCompatActivity {
 
 //    int resID = getResId( temp_string , R.drawable.class); // or other resource class
 
+    public void initCardList() {
+        for(int i=0;i<50;i++)
+        {
+            String color;
+            if(i<10)
+                color = "red";
+            else if (i<20)
+                color = "blue";
+            else if (i<30)
+                color = "white";
+            else if (i<40)
+                color = "yellow";
+            else
+                color = "green";
+            cardList[i].color = color;
+
+            String number;
+            if(0 <= (i%10) && (i%10) <= 2)
+                number = "1";
+            else if (3 <= (i%10) && (i%10) <= 4)
+                number = "2";
+            else if (5 <= (i%10) && (i%10) <= 6)
+                number = "3";
+            else if (7 <= (i%10) && (i%10) <= 8)
+                number = "4";
+            else
+                number = "5";
+            cardList[i].number = number;
+
+            cardList[i].position = "deck";
+            cardList[i].handPosition = "";
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +141,37 @@ public class InGameActivity extends AppCompatActivity {
         String[] email = firebaseUser.getEmail().split("@",2);
         id = email[0];
         //-->
+
+        initCardList();
+
+        boardRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Card card = snapshot.getValue(Card.class);
+
+                cardList[Integer.parseInt(snapshot.getKey())] = card;
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         temp_string = color_array[ 1 ] + "1" ;
 
