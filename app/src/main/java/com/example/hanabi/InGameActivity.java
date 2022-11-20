@@ -43,6 +43,22 @@ public class InGameActivity extends AppCompatActivity {
     card_info[] my_card = new card_info[5] ;
     card_info[] score_deck = new card_info[5] ;
 
+    TextView dump_green[] = new TextView[10] ;
+    Integer[] Rid_dump_green = { R.id.dump_green_1_1 , R.id.dump_green_1_2 , R.id.dump_green_1_3 , R.id.dump_green_2_1 , R.id.dump_green_2_2 , R.id.dump_green_3_1 , R.id.dump_green_3_2 , R.id.dump_green_4_1 , R.id.dump_green_4_2 , R.id.dump_green_5_1 } ;
+
+    TextView dump_red[] = new TextView[10] ;
+    Integer[] Rid_dump_red = { R.id.dump_red_1_1 , R.id.dump_red_1_2 , R.id.dump_red_1_3 , R.id.dump_red_2_1 , R.id.dump_red_2_2 , R.id.dump_red_3_1 , R.id.dump_red_3_2 , R.id.dump_red_4_1 , R.id.dump_red_4_2 , R.id.dump_red_5_1 } ;
+
+    TextView dump_white[] = new TextView[10] ;
+    Integer[] Rid_dump_white = { R.id.dump_white_1_1 , R.id.dump_white_1_2 , R.id.dump_white_1_3 , R.id.dump_white_2_1 , R.id.dump_white_2_2 , R.id.dump_white_3_1 , R.id.dump_white_3_2 , R.id.dump_white_4_1 , R.id.dump_white_4_2 , R.id.dump_white_5_1 } ;
+
+    TextView dump_blue[] = new TextView[10] ;
+    Integer[] Rid_dump_blue = { R.id.dump_blue_1_1 , R.id.dump_blue_1_2 , R.id.dump_blue_1_3 , R.id.dump_blue_2_1 , R.id.dump_blue_2_2 , R.id.dump_blue_3_1 , R.id.dump_blue_3_2 , R.id.dump_blue_4_1 , R.id.dump_blue_4_2 , R.id.dump_blue_5_1 } ;
+
+    TextView dump_y[] = new TextView[10] ;
+    Integer[] Rid_dump_y = { R.id.dump_y_1_1 , R.id.dump_y_1_2 , R.id.dump_y_1_3 , R.id.dump_y_2_1 , R.id.dump_y_2_2 , R.id.dump_y_3_1 , R.id.dump_y_3_2 , R.id.dump_y_4_1 , R.id.dump_y_4_2 , R.id.dump_y_5_1 } ;
+
+
     ImageView left_image[] = new ImageView[5] ;
     Integer[] Rid_left = { R.id.l1_image , R.id.l2_image , R.id.l3_image , R.id.l4_image , R.id.l5_image } ;
 
@@ -283,6 +299,20 @@ public class InGameActivity extends AppCompatActivity {
             }
         });
 
+        for( int i = 0 ; i < 10 ; i ++ ) {
+
+            dump_blue[ i ] = (TextView) findViewById(Rid_dump_blue[ i ]) ;
+            dump_blue[ i ].setTextColor( Color.BLUE );
+            dump_green[ i ] = (TextView) findViewById(Rid_dump_green[ i ]) ;
+            dump_green[ i ].setTextColor( Color.GREEN );
+            dump_red[ i ] = (TextView) findViewById(Rid_dump_red[ i ]) ;
+            dump_red[ i ].setTextColor( Color.RED );
+            dump_y[ i ] = (TextView) findViewById(Rid_dump_y[ i ]) ;
+            dump_y[ i ].setTextColor( Color.YELLOW );
+            dump_white[ i ] = (TextView) findViewById(Rid_dump_white[ i ]) ;
+            dump_white[ i ].setTextColor( Color.WHITE );
+
+        }
 
         for( int i = 0 ; i <  5 ; i ++ ) {
 
@@ -308,7 +338,7 @@ public class InGameActivity extends AppCompatActivity {
         int resID = getResId( temp_string , R.drawable.class); // or other resource class
         left_image[ 0 ].setImageResource( resID ) ;
 
-        score_text = (TextView) findViewById(R.id.score_text)
+        score_text = (TextView) findViewById(R.id.score_text) ;
 
         step1 = (LinearLayout) findViewById(R.id.step1 );
         step2_info = (LinearLayout) findViewById(R.id.step2_info );
