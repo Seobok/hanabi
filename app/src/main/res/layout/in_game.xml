@@ -247,11 +247,10 @@
                 android:text="Score  " />
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:text="12312312" />
+                android:id="@+id/score_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8" />
         </LinearLayout>
 
     </LinearLayout>
@@ -382,9 +381,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="#00FF37"
-                    android:gravity="center"
-                    android:text="b" />
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>
@@ -413,8 +410,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="3" />
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>
@@ -443,8 +439,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="3" />
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>
@@ -472,8 +467,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="3" />
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>
@@ -502,8 +496,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5" />
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>
@@ -538,8 +531,7 @@
                       android:layout_width="30dp"
                       android:layout_height="60dp"
                       android:layout_weight="1"
-                      android:gravity="center"
-                      android:text="2" />
+                      android:gravity="center" />
             </LinearLayout>
 
             <ImageView
@@ -569,8 +561,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="3" />
+                    android:gravity="center" />
             </LinearLayout>
 
             <ImageView
@@ -599,8 +590,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="4" />
+                    android:gravity="center" />
             </LinearLayout>
 
 
@@ -630,8 +620,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="2" />
+                    android:gravity="center" />
             </LinearLayout>
 
             <ImageView
@@ -660,8 +649,7 @@
                   android:layout_width="30dp"
                   android:layout_height="60dp"
                   android:layout_weight="1"
-                  android:gravity="center"
-                  android:text="3" />
+                  android:gravity="center" />
             </LinearLayout>
 
             <ImageView

@@ -64,6 +64,8 @@ public class InGameActivity extends AppCompatActivity {
     ImageView score_image[] = new ImageView[5] ;
     Integer[] Rid_score = { R.id.s1_image , R.id.s2_image , R.id.s3_image , R.id.s4_image , R.id.s5_image } ;
 
+    TextView score_text ;
+
     Button step1_info, step1_submission;
     Button step2_throw, step2_sub, step2_left_player, step2_right_player;
     Button step3_number_1, step3_number_2, step3_number_3, step3_number_4, step3_number_5;
@@ -103,6 +105,10 @@ public class InGameActivity extends AppCompatActivity {
             String temp_string = color_array[ score_deck[ color ].Color() ] + score_deck[ color ].Number() ;
             int resID = getResId( temp_string , R.drawable.class); // or other resource class
             score_image[ color ].setImageResource( resID ) ;
+
+            Integer score = 0 ;
+            for( int i = 0 ; i < 5 ; i ++ ) score += score_deck[ i ].Number() ;
+            score_text.setText( score.toString() );
 
         }
         else { // X
@@ -301,6 +307,8 @@ public class InGameActivity extends AppCompatActivity {
         temp_string = color_array[ left_card[ 0 ].Color() ] + left_card[ 0 ].Number() ;
         int resID = getResId( temp_string , R.drawable.class); // or other resource class
         left_image[ 0 ].setImageResource( resID ) ;
+
+        score_text = (TextView) findViewById(R.id.score_text)
 
         step1 = (LinearLayout) findViewById(R.id.step1 );
         step2_info = (LinearLayout) findViewById(R.id.step2_info );
