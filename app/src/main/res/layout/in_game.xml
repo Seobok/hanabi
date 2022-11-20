@@ -199,35 +199,35 @@
                 app:srcCompat="@drawable/card" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/s1_image"
                 android:layout_width="60dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/s2_image"
                 android:layout_width="60dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/s3_image"
                 android:layout_width="60dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/s4_image"
                 android:layout_width="60dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/s5_image"
                 android:layout_width="60dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
@@ -382,7 +382,7 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="@color/teal_200"
+                    android:background="#00FF37"
                     android:gravity="center"
                     android:text="b" />
             </LinearLayout>
@@ -459,8 +459,7 @@
                 android:id="@+id/l4_image"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
-                android:layout_weight="1"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -697,7 +696,7 @@
 
 
                 <TextView
-                    android:id="@+id/m1_num"
+                    android:id="@+id/m1_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -726,7 +725,7 @@
 
 
                 <TextView
-                    android:id="@+id/m2_num"
+                    android:id="@+id/m2_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -755,7 +754,7 @@
 
 
                 <TextView
-                    android:id="@+id/m3_num"
+                    android:id="@+id/m3_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -784,7 +783,7 @@
 
 
                 <TextView
-                    android:id="@+id/m4_num"
+                    android:id="@+id/m4_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -813,7 +812,7 @@
 
 
                 <TextView
-                    android:id="@+id/m5_num"
+                    android:id="@+id/m5_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
