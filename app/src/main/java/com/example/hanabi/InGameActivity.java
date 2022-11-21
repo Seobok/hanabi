@@ -129,11 +129,14 @@ public class InGameActivity extends AppCompatActivity {
         }
         else { // X
 
+            life -- ;
+            CARD_THROW() ;
+
         }
 
     }
 
-    public void INFO_CARD() { // 색 정보
+    public void INFO_COLOR() { // 색 정보
 
         // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
         if( player == 1 ){ // left
@@ -452,7 +455,7 @@ public class InGameActivity extends AppCompatActivity {
                 step4.setVisibility(View.INVISIBLE);
                 switch (view.getId()) {
                     case R.id.step4_color:
-                        INFO_CARD();
+                        INFO_COLOR();
                         break;
                     case R.id.step4_number:
                         INFO_NUMBER();
