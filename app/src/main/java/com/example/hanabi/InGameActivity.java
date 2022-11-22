@@ -201,6 +201,8 @@ public class InGameActivity extends AppCompatActivity {
     public void initCardList() {
         for(int i=0;i<50;i++)
         {
+            cardList[i] = new Card();
+
             String color;
             if(i<10)
                 color = "red";
@@ -336,7 +338,7 @@ public class InGameActivity extends AppCompatActivity {
 
         temp_string = color_array[ left_card[ 0 ].Color() ] + left_card[ 0 ].Number() ;
         int resID = getResId( temp_string , R.drawable.class); // or other resource class
-        left_image[ 0 ].setImageResource( resID ) ;
+        //left_image[ 0 ].setImageResource( resID );
 
         score_text = (TextView) findViewById(R.id.score_text) ;
 
