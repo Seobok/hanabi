@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +27,7 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Random;
 
 public class InGameActivity extends AppCompatActivity {
 
@@ -117,7 +119,7 @@ public class InGameActivity extends AppCompatActivity {
         int number = sub_card.Number() ;
 
         if( score_deck[ color ].Number() + 1 == number ) { // O
-            score_deck[ color ].Set( color , number + 1 );
+            score_deck[ color ].Set( color , number );
 
             String temp_string = color_array[ score_deck[ color ].Color() ] + score_deck[ color ].Number() ;
             int resID = getResId( temp_string , R.drawable.class); // or other resource class
@@ -145,27 +147,27 @@ public class InGameActivity extends AppCompatActivity {
             int i ;
             int set_color = left_card[ card_num ].Color() ;
 
-            if( set_color == 0 ) for( i = 0 ; i < 5 ; i ++ ) if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.RED ) ;
-            else if( set_color == 1 ) for( i = 0 ; i < 5 ; i ++ ) if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.BLUE ) ;
-            else if( set_color == 2 ) for( i = 0 ; i < 5 ; i ++ ) if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.WHITE ) ;
-            else if( set_color == 3 ) for( i = 0 ; i < 5 ; i ++ ) if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.YELLOW ) ;
-            else if( set_color == 4 ) for( i = 0 ; i < 5 ; i ++ ) if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.GREEN ) ;
+            if( set_color == 0 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.RED ) ; }
+            else if( set_color == 1 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.BLUE ) ; }
+            else if( set_color == 2 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.WHITE ) ; }
+            else if( set_color == 3 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.YELLOW ) ; }
+            else if( set_color == 4 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.GREEN ) ; }
 
         }
         else { // right
 
-            int i ;
-            int set_color = right_card[ card_num ].Color() ;
+            int i;
+            int set_color = right_card[card_num].Color();
 
-            if( set_color == 0 ) for( i = 0 ; i < 5 ; i ++ ) if( right_card[ i ].Color() == set_color ) r_number[ i ].setBackgroundColor( Color.RED ) ;
-            else if( set_color == 1 ) for( i = 0 ; i < 5 ; i ++ ) if( right_card[ i ].Color() == set_color ) r_number[ i ].setBackgroundColor( Color.BLUE ) ;
-            else if( set_color == 2 ) for( i = 0 ; i < 5 ; i ++ ) if( right_card[ i ].Color() == set_color ) r_number[ i ].setBackgroundColor( Color.WHITE ) ;
-            else if( set_color == 3 ) for( i = 0 ; i < 5 ; i ++ ) if( right_card[ i ].Color() == set_color ) r_number[ i ].setBackgroundColor( Color.YELLOW ) ;
-            else if( set_color == 4 ) for( i = 0 ; i < 5 ; i ++ ) if( right_card[ i ].Color() == set_color ) r_number[ i ].setBackgroundColor( Color.GREEN ) ;
+            if (set_color == 0) for (i = 0; i < 5; i++){ if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.RED); }
+            else if (set_color == 1) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.BLUE); }
+            else if (set_color == 2) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color ) r_number[i].setBackgroundColor(Color.WHITE); }
+            else if (set_color == 3) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.YELLOW); }
+            else if (set_color == 4) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.GREEN) ; }
 
         }
 
-    }
+        }
 
     public void INFO_NUMBER() { // 숫자 정보
 
@@ -174,7 +176,7 @@ public class InGameActivity extends AppCompatActivity {
             int i ;
             Integer set_number = left_card[ card_num ].Number() ;
 
-            for( i = 0 ; i < 5 ; i ++ ) if( set_number == left_card[ i ].Number() ) l_number[ i ].setText( set_number.toString() );
+            for( i = 0 ; i < 5 ; i ++ ) { if( set_number == left_card[ i ].Number() ) l_number[ i ].setText( set_number.toString() ) ; }
 
         }
         else { // right
@@ -182,7 +184,7 @@ public class InGameActivity extends AppCompatActivity {
             int i ;
             Integer set_number = right_card[ card_num ].Number() ;
 
-            for( i = 0 ; i < 5 ; i ++ ) if( set_number == right_card[ i ].Number() ) r_number[ i ].setText( set_number.toString() );
+            for( i = 0 ; i < 5 ; i ++ ) { if( set_number == right_card[ i ].Number() ) r_number[ i ].setText( set_number.toString() ) ; }
 
         }
 
@@ -326,6 +328,7 @@ public class InGameActivity extends AppCompatActivity {
             my_card[ i ] = new card_info() ;
             right_card[ i ] = new card_info() ;
             left_card[ i ] = new card_info() ;
+            score_deck[ i ] = new card_info() ;
 
             left_image[ i ] = (ImageView) findViewById(Rid_left[ i ] ) ;
             l_number[ i ] = (TextView) findViewById(Rid_l_n[ i ] ) ;
@@ -341,9 +344,39 @@ public class InGameActivity extends AppCompatActivity {
 
         }
 
-        temp_string = color_array[ left_card[ 0 ].Color() ] + left_card[ 0 ].Number() ;
+        /* 임시 데이터 */
+
+        Random ranint = new Random() ;
+
+        left_card[ 0 ].Set( 0 , 1 ) ;
+        temp_string = color_array[ left_card[ 0 ].Color() ] + Integer.toString(left_card[ 0 ].Number()) ;
         int resID = getResId( temp_string , R.drawable.class); // or other resource class
-        //left_image[ 0 ].setImageResource( resID );
+        left_image[ 0 ].setImageResource( resID );
+
+        for( int i = 0 ; i < 5 ; i ++ ) {
+
+            int temp = ranint.nextInt(5 ) ;
+            left_card[ i ].Set( temp , temp + 1 ) ;
+            temp_string = color_array[ left_card[ i ].Color() ] + Integer.toString(left_card[ i ].Number()) ;
+            resID = getResId( temp_string , R.drawable.class); // or other resource class
+            left_image[ i ].setImageResource( resID );
+
+            temp = ranint.nextInt(5 ) ;
+            right_card[ i ].Set( temp , temp + 1 ) ;
+            temp_string = color_array[ right_card[ i ].Color() ] + Integer.toString( right_card[ i ].Number()) ;
+            resID = getResId( temp_string , R.drawable.class); // or other resource class
+            right_image[ i ].setImageResource( resID );
+
+            temp = ranint.nextInt(5 ) ;
+            my_card[ i ].Set( temp , temp + 1 ) ;
+            temp_string = color_array[ my_card[ i ].Color() ] + Integer.toString(my_card[ i ].Number()) ;
+            resID = getResId( temp_string , R.drawable.class); // or other resource class
+            my_image[ i ].setImageResource( resID );
+
+            score_deck[ i ].Set( 0 , 0 ) ;
+
+        }
+
 
         score_text = (TextView) findViewById(R.id.score_text) ;
 
@@ -421,19 +454,19 @@ public class InGameActivity extends AppCompatActivity {
                 step3_number.setVisibility(View.INVISIBLE) ;
                 switch (view.getId()) {
                     case R.id.step3_number_1:
-                        card_num = 1 ;
+                        card_num = 0 ;
                         break ;
                     case R.id.step3_number_2:
-                        card_num = 2 ;
+                        card_num = 1 ;
                         break ;
                     case R.id.step3_number_3:
-                        card_num = 3 ;
+                        card_num = 2 ;
                         break ;
                     case R.id.step3_number_4:
-                        card_num = 4 ;
+                        card_num = 3 ;
                         break ;
                     case R.id.step3_number_5:
-                        card_num = 5 ;
+                        card_num = 4 ;
                         break ;
                 }
 
