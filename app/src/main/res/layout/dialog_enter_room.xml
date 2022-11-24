@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="200dp"
+    android:background="@drawable/EnterRoomDialog_Background"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="60dp"
+    android:paddingEnd="20dp">
 
-    <TextView
-        android:id="@+id/enter_room_title"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호를 입력하세요"
-        android:textAlignment="center" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/enter_room_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="방 이름"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1/3"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/enter_room_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:background="@drawable/EnterRoomDialog_edtPassword"
         android:ems="10"
+        android:hint="비밀번호"
         android:inputType="textPassword"
         android:minHeight="48dp"
+        android:paddingLeft="20dp"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <Button
+    <ImageButton
         android:id="@+id/enter_room_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="입장하기" />
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/EnterRoomDialog_btnEnter"
+        android:text="입장하기"
+        tools:ignore="SpeakableTextPresentCheck" />
 </LinearLayout>

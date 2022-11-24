@@ -137,6 +137,10 @@ public class RoomListActivity extends Activity {
             }
         });
 
+        gameRef = updateRef.child(Integer.toString(index));
+
+        userRef = gameRef.child("User");
+
         createRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,8 +163,6 @@ public class RoomListActivity extends Activity {
                         if(!(title.isEmpty() || title.equals(""))) {
                             String password = roomPassword.getText().toString();
 
-                            gameRef = firebaseDatabase.getReference("Room").child(Integer.toString(index));
-
                             Hashtable<String,String> newRoom = new Hashtable<>();
 
                             newRoom.put("numberOfPlayer", "1");
@@ -178,8 +180,6 @@ public class RoomListActivity extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), "방 제목을 입력하세요", Toast.LENGTH_SHORT).show();
                         }
-
-                        userRef = gameRef.child("User");
 
                         Hashtable<String,String> newUser = new Hashtable<>();
                         newUser.put("p1", id);

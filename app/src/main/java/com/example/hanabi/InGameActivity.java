@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -30,10 +31,12 @@ public class InGameActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
-    DatabaseReference userRef, boardRef, roomRef;
+    DatabaseReference userRef, boardRef, roomRef, logRef;
 
     String id;
     String roomID;
+
+    User user;
 
     Card[] cardList = new Card[50];
 
@@ -105,7 +108,6 @@ public class InGameActivity extends AppCompatActivity {
 
     public void CARD_THROW( ) { // 내 카드 버리기
 
-
     }
 
     public void CARD_SUB( ) { // 내 카드 제출
@@ -167,7 +169,6 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void INFO_NUMBER() { // 숫자 정보
-
         if( player == 1 ){ // left
 
             int i ;
@@ -184,8 +185,6 @@ public class InGameActivity extends AppCompatActivity {
             for( i = 0 ; i < 5 ; i ++ ) if( set_number == right_card[ i ].Number() ) r_number[ i ].setText( set_number.toString() );
 
         }
-
-
     }
 
     public static int getResId(String resName, Class<?> c) {
@@ -230,7 +229,7 @@ public class InGameActivity extends AppCompatActivity {
                 number = "4";
             else
                 number = "5";
-            cardList[i].number = number ;
+            cardList[i].number = number;
             cardList[i].position = "deck";
             cardList[i].handPosition = "";
         }
@@ -250,6 +249,7 @@ public class InGameActivity extends AppCompatActivity {
         roomRef = firebaseDatabase.getReference("Room").child(roomID);
         userRef = roomRef.child("User");
         boardRef = roomRef.child("Board");
+        logRef = roomRef.child("Log");
         // -->
 
 
@@ -275,6 +275,7 @@ public class InGameActivity extends AppCompatActivity {
         }
         //
 
+        //<-- reference listener
         boardRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -303,6 +304,127 @@ public class InGameActivity extends AppCompatActivity {
 
             }
         });
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User newUser = snapshot.getValue(User.class);
+
+                user = newUser;
+
+                if(user.p1.equals(id)) {
+                    my_id = 1;
+                }
+                else if(user.p2.equals(id)) {
+                    my_id = 2;
+                }
+                else if (user.p3.equals(id)) {
+                    my_id = 3;
+                }
+
+                if(user.p2Ready.equals("true")) {
+                    //TODO p2Ready 이미지 생성
+                }
+                else {
+                    //TODO p2Ready 이미지 제거
+                }
+
+                if(user.p3Ready.equals("true")) {
+                    //TODO p3Ready 이미지 생성
+                }
+                else {
+                    //TODO p3Ready 이미지 제거
+                }
+
+                if(user.p2Ready.equals("true") && user.p3Ready.equals("true")) {
+                    //TODO 게임시작버튼 생성
+                }
+                else {
+                    //TODO 게임시작버튼 제거
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        logRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Log newLog = snapshot.getValue(Log.class);
+
+                if(newLog.logType.equals("hint")) {
+                    if(newLog.hintUser.equals("1")) {
+                        if(newLog.hintType.equals("color")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].color
+                        }
+                        else if (newLog.hintType.equals("number")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].number
+                        }
+                    }
+                    else if(newLog.hintUser.equals("2")) {
+                        if(newLog.hintType.equals("color")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].color
+                        }
+                        else if (newLog.hintType.equals("number")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].number
+                        }
+                    }
+                    else if(newLog.hintUser.equals("3")) {
+                        if(newLog.hintType.equals("color")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].color
+                        }
+                        else if (newLog.hintType.equals("number")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].number
+                        }
+                    }
+                }
+                else if(newLog.logType.equals("submit")) {  //hintType에 제출한 handPosition을 저장 (따로 만들어도 됨)
+                    if(cardList[Integer.parseInt(newLog.cardID)].position.equals('p'+newLog.hintUser)               //제출한 카드가 hintUser에게 있는 카드인지 확인
+                            && cardList[Integer.parseInt(newLog.cardID)].handPosition.equals(newLog.hintType)) {    //제출한 카드의 위치가 맞는지 확인
+                        //TODO 제출성공
+                    }
+                    else {
+                        //TODO 제출실패
+                    }
+                }
+                else if(newLog.logType.equals("discard")) {
+                    //cardList는 '버리기'행동을 할때 자동으로 바뀜
+                    //필요한지 물어보기
+                }
+                else if(newLog.logType.equals("nextTurn")) {
+                    if(newLog.hintUser.equals(Integer.toString(left_player))) {
+                        //TODO 내턴 시작
+                    }
+                }
+                else if(newLog.logType.equals("score")) { //hintType에 변경된 score값이 저장
+                    //score_text.setText(newLog.hintType);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //-->
 
         for( int i = 0 ; i < 10 ; i ++ ) {
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_Background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -11,7 +12,6 @@
         android:id="@+id/logoLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -19,60 +19,85 @@
             android:id="@+id/mainLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/main_Image" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/InputLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="20dp"
+        android:paddingTop="200dp"
         android:paddingRight="20dp">
 
-        <EditText
-            android:id="@+id/idText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="ID"
-            android:inputType="textPersonName"
-            android:minHeight="48dp" />
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/main_edtEmail"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/passwordText"
+            <EditText
+                android:id="@+id/idText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:ems="10"
+                android:hint="이메일"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="PW"
-            android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:layout_height="50dp"
+            android:background="@drawable/main_edtPassword"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/passwordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:textAlignment="center" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:gravity="center"
+            android:orientation="vertical"
             android:paddingTop="20dp">
 
-            <Button
-                android:id="@+id/signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="회원가입" />
-
-            <Button
+            <ImageButton
                 android:id="@+id/loginBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="235dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:text="로그인" />
+                android:background="@drawable/main_btnLogin"
+                android:text="로그인"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/signup"
+                android:layout_width="235dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/main_btnSignup"
+                android:text="회원가입"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
