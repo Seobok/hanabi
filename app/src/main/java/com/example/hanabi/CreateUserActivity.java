@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,7 @@ public class CreateUserActivity extends Activity {
     private static final String TAG = "CreateUserActivity";
 
     EditText email, password, password2;
-    Button signupButton;
+    ImageButton signupButton;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -41,7 +42,7 @@ public class CreateUserActivity extends Activity {
         email = (EditText) findViewById(R.id.newEmail);
         password = (EditText) findViewById(R.id.newPassword);
         password2 = (EditText) findViewById(R.id.newPassword2);
-        signupButton = (Button) findViewById(R.id.createUserButton);
+        signupButton = (ImageButton) findViewById(R.id.createUserButton);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
 

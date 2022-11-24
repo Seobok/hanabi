@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    Button signup, loginBtn;
+    ImageButton signup, loginBtn;
     EditText emailText, passwordText;
     FirebaseAuth firebaseAuth;
 
@@ -32,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        signup = (Button) findViewById(R.id.signup);
-        loginBtn = (Button) findViewById(R.id.loginBtn);
+        signup = (ImageButton) findViewById(R.id.signup);
+        loginBtn = (ImageButton) findViewById(R.id.loginBtn);
 
         emailText = (EditText) findViewById(R.id.idText);
         passwordText = (EditText) findViewById(R.id.passwordText);

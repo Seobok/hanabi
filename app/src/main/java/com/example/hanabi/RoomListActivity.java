@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -151,7 +152,7 @@ public class RoomListActivity extends Activity {
 
                 EditText roomName = dialogView.findViewById(R.id.createRoom_roomName);
                 EditText roomPassword = dialogView.findViewById(R.id.createRoom_roomPassword);
-                Button OkBtn = dialogView.findViewById(R.id.createRoom_OKBtn);
+                ImageButton OkBtn = dialogView.findViewById(R.id.createRoom_OKBtn);
 
                 dlg.setView(dialogView);
                 Dialog dialog = dlg.create();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_Background"
+    android:background="@drawable/main_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -19,7 +19,7 @@
             android:id="@+id/mainLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@drawable/main_Image" />
+            tools:srcCompat="@drawable/main_image" />
     </LinearLayout>
 
     <LinearLayout
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/main_edtEmail"
+            android:background="@drawable/main_edtemail"
             android:orientation="horizontal">
 
             <EditText
@@ -54,7 +54,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/main_edtPassword"
+            android:background="@drawable/main_edtpassword"
             android:orientation="horizontal">
 
             <EditText
@@ -82,7 +82,7 @@
                 android:layout_width="235dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_btnLogin"
+                android:background="@drawable/main_btnlogin"
                 android:text="로그인"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -92,7 +92,7 @@
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_btnSignup"
+                android:background="@drawable/main_btnsignup"
                 android:text="회원가입"
                 tools:ignore="SpeakableTextPresentCheck" />
 

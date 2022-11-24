@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@drawable/EnterRoomDialog_Background"
+    android:background="@drawable/enterroomdialog_background"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:paddingLeft="60dp"
@@ -39,7 +39,7 @@
         android:id="@+id/enter_room_password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/EnterRoomDialog_edtPassword"
+        android:background="@drawable/enterroomdialog_edtpassword"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword"
@@ -53,7 +53,7 @@
         android:layout_height="48dp"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/EnterRoomDialog_btnEnter"
+        android:background="@drawable/enterroomdialog_btnenter"
         android:text="입장하기"
         tools:ignore="SpeakableTextPresentCheck" />
 </LinearLayout>

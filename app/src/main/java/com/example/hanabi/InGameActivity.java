@@ -39,7 +39,7 @@ public class InGameActivity extends AppCompatActivity {
     String id;
     String roomID;
 
-    User user;
+    User user = new User();
 
     Card[] cardList = new Card[50];
 
