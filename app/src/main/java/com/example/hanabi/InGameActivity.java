@@ -28,18 +28,19 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Random;
 
 public class InGameActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
-    DatabaseReference userRef, boardRef, roomRef, logRef;
+    DatabaseReference userRef, boardRef, roomRef, logRef, lifeRef;
 
     String id;
     String roomID;
 
-    User user = new User();
+    User user;
 
     Card[] cardList = new Card[50];
 
@@ -110,7 +111,7 @@ public class InGameActivity extends AppCompatActivity {
     String[] color_array = { "red_" , "blue_" , "white_" , "yellow_" , "green_" , "card" } ;
 
     public void CARD_THROW( ) { // 내 카드 버리기
-
+        drawCard(my_id, card_num);
     }
 
     public void CARD_SUB( ) { // 내 카드 제출
@@ -127,27 +128,37 @@ public class InGameActivity extends AppCompatActivity {
             int resID = getResId( temp_string , R.drawable.class); // or other resource class
             score_image[ color ].setImageResource( resID ) ;
 
+            drawCard(my_id, card_num);
+
             Integer score = 0 ;
             for( int i = 0 ; i < 5 ; i ++ ) score += score_deck[ i ].Number() ;
             score_text.setText( score.toString() );
 
+            Hashtable<String,String> newLog = new Hashtable<>();
+            newLog.put("logType","submit");
+            newLog.put("hintUser",Integer.toString(my_id));
+            newLog.put("cardID", Integer.toString(sub_card.Idx()));
+            newLog.put("hintType","");
+            logRef.setValue(newLog);
         }
         else { // X
-
             life -- ;
             CARD_THROW() ;
 
+            lifeRef.setValue(life);
         }
 
     }
 
     public void INFO_COLOR() { // 색 정보
 
+        int idx;
         // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
         if( player == 1 ){ // left
 
             int i ;
             int set_color = left_card[ card_num ].Color() ;
+            idx=left_card[card_num].Idx();
 
             if( set_color == 0 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.RED ) ; }
             else if( set_color == 1 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.BLUE ) ; }
@@ -160,6 +171,7 @@ public class InGameActivity extends AppCompatActivity {
 
             int i;
             int set_color = right_card[card_num].Color();
+            idx=right_card[card_num].Idx();
 
             if (set_color == 0) for (i = 0; i < 5; i++){ if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.RED); }
             else if (set_color == 1) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.BLUE); }
@@ -169,13 +181,23 @@ public class InGameActivity extends AppCompatActivity {
 
         }
 
+        Hashtable<String,String> newLog = new Hashtable<>();
+        newLog.put("logType","hint");
+        newLog.put("hintUser",Integer.toString((my_id+player)%3));
+        newLog.put("cardID", Integer.toString(idx));
+        newLog.put("hintType","color");
+        logRef.setValue(newLog);
+
         }
 
     public void INFO_NUMBER() { // 숫자 정보
+        int idx;
+
         if( player == 1 ){ // left
 
             int i ;
             Integer set_number = left_card[ card_num ].Number() ;
+            idx=left_card[card_num].Idx();
 
             for( i = 0 ; i < 5 ; i ++ ) { if( set_number == left_card[ i ].Number() ) l_number[ i ].setText( set_number.toString() ) ; }
 
@@ -184,10 +206,45 @@ public class InGameActivity extends AppCompatActivity {
 
             int i ;
             Integer set_number = right_card[ card_num ].Number() ;
+            idx=right_card[card_num].Idx();
 
             for( i = 0 ; i < 5 ; i ++ ) { if( set_number == right_card[ i ].Number() ) r_number[ i ].setText( set_number.toString() ) ; }
 
         }
+
+        Hashtable<String,String> newLog = new Hashtable<>();
+        newLog.put("logType","hint");
+        newLog.put("hintUser",Integer.toString((my_id+player)%3));
+        newLog.put("cardID", Integer.toString(idx));
+        newLog.put("hintType","number");
+        logRef.setValue(newLog);
+    }
+    public void nextTurn() {
+        Hashtable<String,String> newLog = new Hashtable<>();
+        newLog.put("logType","nextTurn");
+        newLog.put("hintUser",Integer.toString(my_id));
+        newLog.put("cardID", "");
+        newLog.put("hintType","");
+        logRef.setValue(newLog);
+    }
+
+    public void drawCard(int playerID, int playerHand) {
+        Random ranint = new Random();
+
+        int randCardID = ranint.nextInt(50);
+        while(!cardList[randCardID].position.equals("deck")) {
+            randCardID = ranint.nextInt(50);
+        }
+
+        Hashtable<String,String> newCard = new Hashtable<>();
+        newCard.put("color",cardList[randCardID].color);
+        newCard.put("number",cardList[randCardID].number);
+        newCard.put("position", Integer.toString(playerID+1));
+        newCard.put("handPosition",Integer.toString(playerHand));
+        boardRef.child(Integer.toString(randCardID)).setValue(newCard);
+
+        cardList[randCardID].position = Integer.toString(playerID+1);
+        cardList[randCardID].handPosition = Integer.toString(playerHand);
     }
 
     public static int getResId(String resName, Class<?> c) {
@@ -254,6 +311,9 @@ public class InGameActivity extends AppCompatActivity {
         userRef = roomRef.child("User");
         boardRef = roomRef.child("Board");
         logRef = roomRef.child("Log");
+        lifeRef = roomRef.child("Life");
+
+        lifeRef.setValue(3);
         // -->
 
 
@@ -263,21 +323,6 @@ public class InGameActivity extends AppCompatActivity {
         //-->
 
         initCardList();
-
-        // id
-        if( my_id == 1 ){
-            right_player = 3 ;
-            left_player = 2 ;
-        }
-        else if( my_id == 2 ){
-            left_player = 3 ;
-            right_player = 1 ;
-        }
-        else {
-            left_player = 1 ;
-            right_player = 2 ;
-        }
-        //
 
         //<-- reference listener
         boardRef.addChildEventListener(new ChildEventListener() {
@@ -291,6 +336,8 @@ public class InGameActivity extends AppCompatActivity {
                 Card card = snapshot.getValue(Card.class);
 
                 cardList[Integer.parseInt(snapshot.getKey())] = card;
+
+                //if(card.position.equals())
             }
 
             @Override
@@ -314,17 +361,34 @@ public class InGameActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User newUser = snapshot.getValue(User.class);
 
+                user = new User();
+
                 user = newUser;
 
                 if(user.p1.equals(id)) {
-                    my_id = 1;
+                    my_id = 0;
                 }
                 else if(user.p2.equals(id)) {
-                    my_id = 2;
+                    my_id = 1;
                 }
                 else if (user.p3.equals(id)) {
-                    my_id = 3;
+                    my_id = 2;
                 }
+
+                // id
+                if( my_id == 0 ){
+                    right_player = 2 ;
+                    left_player = 1 ;
+                }
+                else if( my_id == 1 ){
+                    left_player = 2 ;
+                    right_player = 0 ;
+                }
+                else {
+                    left_player = 0 ;
+                    right_player = 1 ;
+                }
+                //
 
                 if(user.p2Ready.equals("true")) {
                     //TODO p2Ready 이미지 생성
@@ -360,7 +424,15 @@ public class InGameActivity extends AppCompatActivity {
                 Log newLog = snapshot.getValue(Log.class);
 
                 if(newLog.logType.equals("hint")) {
-                    if(newLog.hintUser.equals("1")) {
+                    if(newLog.hintUser.equals("0")) {
+                        if(newLog.hintType.equals("color")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].color
+                        }
+                        else if (newLog.hintType.equals("number")) {
+                            //cardList[Integer.parseInt(newLog.cardID)].number
+                        }
+                    }
+                    else if(newLog.hintUser.equals("1")) {
                         if(newLog.hintType.equals("color")) {
                             //cardList[Integer.parseInt(newLog.cardID)].color
                         }
@@ -376,15 +448,7 @@ public class InGameActivity extends AppCompatActivity {
                             //cardList[Integer.parseInt(newLog.cardID)].number
                         }
                     }
-                    else if(newLog.hintUser.equals("3")) {
-                        if(newLog.hintType.equals("color")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].color
-                        }
-                        else if (newLog.hintType.equals("number")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].number
-                        }
-                    }
-                }
+                }/*
                 else if(newLog.logType.equals("submit")) {  //hintType에 제출한 handPosition을 저장 (따로 만들어도 됨)
                     if(cardList[Integer.parseInt(newLog.cardID)].position.equals('p'+newLog.hintUser)               //제출한 카드가 hintUser에게 있는 카드인지 확인
                             && cardList[Integer.parseInt(newLog.cardID)].handPosition.equals(newLog.hintType)) {    //제출한 카드의 위치가 맞는지 확인
@@ -394,17 +458,12 @@ public class InGameActivity extends AppCompatActivity {
                         //TODO 제출실패
                     }
                 }
-                else if(newLog.logType.equals("discard")) {
-                    //cardList는 '버리기'행동을 할때 자동으로 바뀜
-                    //필요한지 물어보기
-                }
+                */
                 else if(newLog.logType.equals("nextTurn")) {
                     if(newLog.hintUser.equals(Integer.toString(left_player))) {
                         //TODO 내턴 시작
+                        step1.setVisibility(View.VISIBLE);
                     }
-                }
-                else if(newLog.logType.equals("score")) { //hintType에 변경된 score값이 저장
-                    //score_text.setText(newLog.hintType);
                 }
             }
 
@@ -421,6 +480,18 @@ public class InGameActivity extends AppCompatActivity {
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        lifeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                life = snapshot.getValue(Integer.class);
             }
 
             @Override
@@ -482,6 +553,19 @@ public class InGameActivity extends AppCompatActivity {
             temp_string = color_array[ left_card[ i ].Color() ] + Integer.toString(left_card[ i ].Number()) ;
             resID = getResId( temp_string , R.drawable.class); // or other resource class
             left_image[ i ].setImageResource( resID );
+
+            if(my_id == 1) {
+                for(int _i=0;_i<3;_i++)
+                {
+                    for(int _j=0;_j<5;_j++)
+                    {
+                        drawCard(_i,_j);
+                    }
+
+                }
+
+            }
+
 
             temp = ranint.nextInt(5 ) ;
             right_card[ i ].Set( temp , temp + 1 ) ;
@@ -620,6 +704,8 @@ public class InGameActivity extends AppCompatActivity {
                         INFO_NUMBER();
                         break;
                     }
+
+
             }
 
         };
