@@ -138,10 +138,6 @@ public class RoomListActivity extends Activity {
             }
         });
 
-        gameRef = updateRef.child(Integer.toString(index));
-
-        userRef = gameRef.child("User");
-
         createRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,6 +162,8 @@ public class RoomListActivity extends Activity {
 
                             Hashtable<String,String> newRoom = new Hashtable<>();
 
+                            gameRef = updateRef.child(Integer.toString(index));
+
                             newRoom.put("numberOfPlayer", "1");
                             newRoom.put("title", title);
                             newRoom.put("password", password);
@@ -181,6 +179,8 @@ public class RoomListActivity extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), "방 제목을 입력하세요", Toast.LENGTH_SHORT).show();
                         }
+
+                        userRef = gameRef.child("User");
 
                         Hashtable<String,String> newUser = new Hashtable<>();
                         newUser.put("p1", id);
@@ -229,7 +229,7 @@ public class RoomListActivity extends Activity {
 
                         // <-- 대기실로 이동
                         Intent intent = new Intent(getApplicationContext(), InGameActivity.class);
-                        intent.putExtra("RoomNum", Integer.toString(index));
+                        intent.putExtra("RoomNum", Integer.toString(index-1));
                         startActivity(intent);
                         // -->
 

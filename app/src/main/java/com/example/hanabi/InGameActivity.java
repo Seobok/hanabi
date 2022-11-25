@@ -33,6 +33,8 @@ import java.util.Random;
 
 public class InGameActivity extends AppCompatActivity {
 
+    private static final String TAG = "InGameActivity";
+
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
     DatabaseReference userRef, boardRef, roomRef, logRef, lifeRef;
@@ -307,6 +309,7 @@ public class InGameActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance("https://hanabi-ea7e9-default-rtdb.asia-southeast1.firebasedatabase.app/");
         roomID = getIntent().getStringExtra("RoomNum");
+        android.util.Log.d("TAG", roomID);
         roomRef = firebaseDatabase.getReference("Room").child(roomID);
         userRef = roomRef.child("User");
         boardRef = roomRef.child("Board");
@@ -361,17 +364,15 @@ public class InGameActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User newUser = snapshot.getValue(User.class);
 
-                user = new User();
-
                 user = newUser;
 
-                if(user.p1.equals(id)) {
+                if(newUser.p1.equals(id)) {
                     my_id = 0;
                 }
-                else if(user.p2.equals(id)) {
+                else if(newUser.p2.equals(id)) {
                     my_id = 1;
                 }
-                else if (user.p3.equals(id)) {
+                else if (newUser.p3.equals(id)) {
                     my_id = 2;
                 }
 
@@ -390,21 +391,21 @@ public class InGameActivity extends AppCompatActivity {
                 }
                 //
 
-                if(user.p2Ready.equals("true")) {
+                if(newUser.p2Ready.equals("true")) {
                     //TODO p2Ready 이미지 생성
                 }
                 else {
                     //TODO p2Ready 이미지 제거
                 }
 
-                if(user.p3Ready.equals("true")) {
+                if(newUser.p3Ready.equals("true")) {
                     //TODO p3Ready 이미지 생성
                 }
                 else {
                     //TODO p3Ready 이미지 제거
                 }
 
-                if(user.p2Ready.equals("true") && user.p3Ready.equals("true")) {
+                if(newUser.p2Ready.equals("true") && newUser.p3Ready.equals("true")) {
                     //TODO 게임시작버튼 생성
                 }
                 else {
