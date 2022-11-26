@@ -115,7 +115,7 @@ public class InGameActivity extends AppCompatActivity {
         int color = Integer.parseInt( now.color ) ;
         int number = Integer.parseInt( now.number ) ;
 
-        if( temp == "submit" ) {
+        if( temp.equals("submit")) {
 
             score_deck[ color ].Set( color , number );
 
@@ -128,7 +128,7 @@ public class InGameActivity extends AppCompatActivity {
             score_image[ color ].setImageResource( resID ) ;
 
         }
-        else if ( temp == "dump" ) {
+        else if ( temp.equals("dump") ) {
 
         }
         else {
