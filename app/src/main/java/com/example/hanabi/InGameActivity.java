@@ -502,7 +502,7 @@ public class InGameActivity extends AppCompatActivity {
                 }
                 */
                 else if(newLog.logType.equals("nextTurn")) {
-                    if(newLog.hintUser.equals(Integer.toString(left_player))) {
+                    if(newLog.hintUser.equals(Integer.toString(right_player))) {
                         //TODO 내턴 시작
                         step1.setVisibility(View.VISIBLE);
                     }
