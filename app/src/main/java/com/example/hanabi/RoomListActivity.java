@@ -41,7 +41,7 @@ public class RoomListActivity extends Activity {
     RecyclerView recyclerView;
     Adapter adapter = new Adapter();
 
-    Button createRoomBtn;
+    ImageButton createRoomBtn;
 
     int index;
     String id;
@@ -61,7 +61,7 @@ public class RoomListActivity extends Activity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance("https://hanabi-ea7e9-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
-        createRoomBtn = (Button) findViewById(R.id.createRoomBtn);
+        createRoomBtn = (ImageButton) findViewById(R.id.createRoomBtn);
 
         String email = firebaseUser.getEmail();
         String[] split = email.split("@",2);

@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="match_parent"
     android:background="@drawable/enterroomdialog_background"
-    android:gravity="center_vertical"
     android:orientation="vertical"
     android:paddingLeft="60dp"
-    android:paddingEnd="20dp">
+    android:paddingTop="170dp"
+    android:paddingRight="40dp">
 
     <LinearLayout
         android:layout_width="wrap_content"

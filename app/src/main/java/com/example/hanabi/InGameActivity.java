@@ -419,10 +419,12 @@ public class InGameActivity extends AppCompatActivity {
             }
         });
 
-        logRef.addChildEventListener(new ChildEventListener() {
+        logRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log newLog = snapshot.getValue(Log.class);
+                if(newLog == null)
+                    newLog = new Log();
 
                 if(newLog.logType.equals("hint")) {
                     if(newLog.hintUser.equals("0")) {
@@ -466,21 +468,6 @@ public class InGameActivity extends AppCompatActivity {
                         step1.setVisibility(View.VISIBLE);
                     }
                 }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
             }
 
             @Override

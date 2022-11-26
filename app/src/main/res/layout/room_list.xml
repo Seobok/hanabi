@@ -3,46 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/roomlist_background"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingTop="10dp"
     android:paddingRight="20dp"
     android:paddingBottom="10dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="대기실"
-        android:textAlignment="center"
-        android:textSize="50sp" />
+    <ImageButton
+        android:id="@+id/createRoomBtn"
+        android:layout_width="185dp"
+        android:layout_height="63dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/roomlist_btnmakeroom"
+        android:minHeight="48dp"
+        android:text="방만들기"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/roomList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
         tools:listitem="@layout/recycler_view_item">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5.5"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/createRoomBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:text="방만들기"
-            tools:ignore="TouchTargetSizeCheck" />
-
-    </LinearLayout>
 
 </LinearLayout>

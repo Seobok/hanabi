@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Room room = roomList.get(position);
         holder.roomName.setText(room.title);
-        holder.roomInfo.setText(room.numberOfPlayer);
+        holder.roomInfo.setText(room.numberOfPlayer + " / 3");
 
         holder.enterRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +62,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(context);
 
                 final EditText enterRoomPassword = (EditText) dialogView.findViewById(R.id.enter_room_password);
-                final Button enterRoomBtn = (Button) dialogView.findViewById(R.id.enter_room_btn);
+                final ImageButton enterRoomBtn = (ImageButton) dialogView.findViewById(R.id.enter_room_btn);
 
                 dlg.setView(dialogView);
                 Dialog dialog = dlg.create();
