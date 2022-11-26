@@ -46,71 +46,165 @@ public class InGameActivity extends AppCompatActivity {
 
     Card[] cardList = new Card[50];
 
-    card_info[] left_card = new card_info[5] ;
-    card_info[] right_card = new card_info[5] ;
-    card_info[] new_card = new card_info[5] ;
-    card_info[] my_card = new card_info[5] ;
-    card_info[] score_deck = new card_info[5] ;
+    int[][] hand_card = new int[3][5];
+    card_info[] score_deck = new card_info[5];
 
-    TextView dump_green[] = new TextView[10] ;
-    Integer[] Rid_dump_green = { R.id.dump_green_1_1 , R.id.dump_green_1_2 , R.id.dump_green_1_3 , R.id.dump_green_2_1 , R.id.dump_green_2_2 , R.id.dump_green_3_1 , R.id.dump_green_3_2 , R.id.dump_green_4_1 , R.id.dump_green_4_2 , R.id.dump_green_5_1 } ;
+    TextView dump_green[] = new TextView[10];
+    Integer[] Rid_dump_green = {R.id.dump_green_1_1, R.id.dump_green_1_2, R.id.dump_green_1_3, R.id.dump_green_2_1, R.id.dump_green_2_2, R.id.dump_green_3_1, R.id.dump_green_3_2, R.id.dump_green_4_1, R.id.dump_green_4_2, R.id.dump_green_5_1};
 
-    TextView dump_red[] = new TextView[10] ;
-    Integer[] Rid_dump_red = { R.id.dump_red_1_1 , R.id.dump_red_1_2 , R.id.dump_red_1_3 , R.id.dump_red_2_1 , R.id.dump_red_2_2 , R.id.dump_red_3_1 , R.id.dump_red_3_2 , R.id.dump_red_4_1 , R.id.dump_red_4_2 , R.id.dump_red_5_1 } ;
+    TextView dump_red[] = new TextView[10];
+    Integer[] Rid_dump_red = {R.id.dump_red_1_1, R.id.dump_red_1_2, R.id.dump_red_1_3, R.id.dump_red_2_1, R.id.dump_red_2_2, R.id.dump_red_3_1, R.id.dump_red_3_2, R.id.dump_red_4_1, R.id.dump_red_4_2, R.id.dump_red_5_1};
 
-    TextView dump_white[] = new TextView[10] ;
-    Integer[] Rid_dump_white = { R.id.dump_white_1_1 , R.id.dump_white_1_2 , R.id.dump_white_1_3 , R.id.dump_white_2_1 , R.id.dump_white_2_2 , R.id.dump_white_3_1 , R.id.dump_white_3_2 , R.id.dump_white_4_1 , R.id.dump_white_4_2 , R.id.dump_white_5_1 } ;
+    TextView dump_white[] = new TextView[10];
+    Integer[] Rid_dump_white = {R.id.dump_white_1_1, R.id.dump_white_1_2, R.id.dump_white_1_3, R.id.dump_white_2_1, R.id.dump_white_2_2, R.id.dump_white_3_1, R.id.dump_white_3_2, R.id.dump_white_4_1, R.id.dump_white_4_2, R.id.dump_white_5_1};
 
-    TextView dump_blue[] = new TextView[10] ;
-    Integer[] Rid_dump_blue = { R.id.dump_blue_1_1 , R.id.dump_blue_1_2 , R.id.dump_blue_1_3 , R.id.dump_blue_2_1 , R.id.dump_blue_2_2 , R.id.dump_blue_3_1 , R.id.dump_blue_3_2 , R.id.dump_blue_4_1 , R.id.dump_blue_4_2 , R.id.dump_blue_5_1 } ;
+    TextView dump_blue[] = new TextView[10];
+    Integer[] Rid_dump_blue = {R.id.dump_blue_1_1, R.id.dump_blue_1_2, R.id.dump_blue_1_3, R.id.dump_blue_2_1, R.id.dump_blue_2_2, R.id.dump_blue_3_1, R.id.dump_blue_3_2, R.id.dump_blue_4_1, R.id.dump_blue_4_2, R.id.dump_blue_5_1};
 
-    TextView dump_y[] = new TextView[10] ;
-    Integer[] Rid_dump_y = { R.id.dump_y_1_1 , R.id.dump_y_1_2 , R.id.dump_y_1_3 , R.id.dump_y_2_1 , R.id.dump_y_2_2 , R.id.dump_y_3_1 , R.id.dump_y_3_2 , R.id.dump_y_4_1 , R.id.dump_y_4_2 , R.id.dump_y_5_1 } ;
+    TextView dump_y[] = new TextView[10];
+    Integer[] Rid_dump_y = {R.id.dump_y_1_1, R.id.dump_y_1_2, R.id.dump_y_1_3, R.id.dump_y_2_1, R.id.dump_y_2_2, R.id.dump_y_3_1, R.id.dump_y_3_2, R.id.dump_y_4_1, R.id.dump_y_4_2, R.id.dump_y_5_1};
 
+    ImageView left_image[] = new ImageView[5];
+    Integer[] Rid_left = {R.id.l1_image, R.id.l2_image, R.id.l3_image, R.id.l4_image, R.id.l5_image};
 
-    ImageView left_image[] = new ImageView[5] ;
-    Integer[] Rid_left = { R.id.l1_image , R.id.l2_image , R.id.l3_image , R.id.l4_image , R.id.l5_image } ;
+    TextView l_number[] = new TextView[5];
+    Integer[] Rid_l_n = {R.id.l1_number, R.id.l2_number, R.id.l3_number, R.id.l4_number, R.id.l5_number};
 
-    TextView l_number[] = new TextView[5] ;
-    Integer[] Rid_l_n = { R.id.l1_number , R.id.l2_number , R.id.l3_number , R.id.l4_number , R.id.l5_number } ;
+    ImageView right_image[] = new ImageView[5];
+    Integer[] Rid_right = {R.id.r1_image, R.id.r2_image, R.id.r3_image, R.id.r4_image, R.id.r5_image};
 
-    ImageView right_image[] = new ImageView[5] ;
-    Integer[] Rid_right = { R.id.r1_image , R.id.r2_image , R.id.r3_image , R.id.r4_image , R.id.r5_image } ;
+    TextView r_number[] = new TextView[5];
+    Integer[] Rid_r_n = {R.id.r1_number, R.id.r2_number, R.id.r3_number, R.id.r4_number, R.id.r5_number};
 
-    TextView r_number[] = new TextView[5] ;
-    Integer[] Rid_r_n = { R.id.r1_number , R.id.r2_number , R.id.r3_number , R.id.r4_number , R.id.r5_number } ;
+    ImageView my_image[] = new ImageView[5];
+    Integer[] Rid_my = {R.id.m1_image, R.id.m2_image, R.id.m3_image, R.id.m4_image, R.id.m5_image};
 
-    ImageView my_image[] = new ImageView[5] ;
-    Integer[] Rid_my = { R.id.m1_image , R.id.m2_image , R.id.m3_image , R.id.m4_image , R.id.m5_image } ;
+    TextView m_number[] = new TextView[5];
+    Integer[] Rid_m_n = {R.id.m1_number, R.id.m2_number, R.id.m3_number, R.id.m4_number, R.id.m5_number};
 
-    TextView m_number[] = new TextView[5] ;
-    Integer[] Rid_m_n = { R.id.m1_number , R.id.m2_number , R.id.m3_number , R.id.m4_number , R.id.m5_number } ;
+    ImageView score_image[] = new ImageView[5];
+    Integer[] Rid_score = {R.id.s1_image, R.id.s2_image, R.id.s3_image, R.id.s4_image, R.id.s5_image};
 
-    ImageView score_image[] = new ImageView[5] ;
-    Integer[] Rid_score = { R.id.s1_image , R.id.s2_image , R.id.s3_image , R.id.s4_image , R.id.s5_image } ;
-
-    TextView score_text ;
+    TextView score_text;
 
     Button step1_info, step1_submission;
     Button step2_throw, step2_sub, step2_left_player, step2_right_player;
     Button step3_number_1, step3_number_2, step3_number_3, step3_number_4, step3_number_5;
     Button step4_color, step4_number;
-    Button.OnClickListener step1_O, step_number , step4_0 ;
-
+    Button.OnClickListener step1_O, step_number, step4_0;
 
     Boolean step4_check;
 
-    int life = 3 ;
-    int card_num, player ;
+    int life = 3;
+    int card_num, player;
     // player left : 1 , right : 2
-    int sub_or_throw ;
-    int left_player , right_player , my_id ;
-    String temp_string ;
+    int sub_or_throw;
+    int left_player, right_player, my_id;
 
     LinearLayout step1, step2_submission, step2_info, step4, step3_number;
 
     // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
-    String[] color_array = { "red_" , "blue_" , "white_" , "yellow_" , "green_" , "card" } ;
+    String[] color_array = {"red_", "blue_", "white_", "yellow_", "green_", "card"};
+
+    public void CARD_PAINT( int card_id ) {
+
+        String temp_string ;
+
+        String temp = cardList[ card_id ].position ;
+        Card now = cardList[ card_id ] ;
+        int color = Integer.parseInt( now.color ) ;
+        int number = Integer.parseInt( now.number ) ;
+
+        if( temp == "submit" ) {
+
+            score_deck[ color ].Set( color , number );
+
+            Integer score = 0 ;
+            for( int i = 0 ; i < 5 ; i ++ ) score += score_deck[ i ].Number() ;
+            score_text.setText( score.toString() );
+
+            temp_string = color_array[ score_deck[ color ].Color() ] + score_deck[ color ].Number() ;
+            int resID = getResId( temp_string , R.drawable.class); // or other resource class
+            score_image[ color ].setImageResource( resID ) ;
+
+        }
+        else if ( temp == "dump" ) {
+
+        }
+        else {
+
+            int player_id = Integer.parseInt( temp ) ;
+            int h_P = Integer.parseInt( now.handPosition ) ;
+
+            temp_string = color_array[ color ] + Integer.toString( number ) ;
+
+            int resID = getResId(temp_string, R.drawable.class); // or other resource class
+            hand_card[ player_id ][ h_P ] = ( card_id ) ;
+
+            if( player_id == my_id ){
+                my_image[ h_P ].setImageResource(resID);
+                m_number[ h_P ].setText( temp_string );
+            }
+            else if( player_id == ( my_id + 1 ) % 3 ){
+                left_image[ h_P ].setImageResource(resID);
+                l_number[ h_P ].setText( temp_string );
+            }
+            else{
+                right_image[ h_P ].setImageResource(resID);
+                r_number[ h_P ].setText( temp_string );
+            }
+
+        }
+
+    }
+
+    public void INFO_PAINT_NUMBER( int player_id , int card_id ) {
+
+        int i ;
+        Integer set_number = Integer.parseInt( cardList[ card_id ].number ) ;
+
+        if( player_id == my_id ) for( i = 0 ; i < 5 ; i ++ ) { if( set_number == Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].number ) ) m_number[ i ].setText( set_number.toString() ) ; }
+        else if( player_id == ( ( my_id ) + 1 ) % 3 ) for( i = 0 ; i < 5 ; i ++ ) { if( set_number == Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].number ) ) l_number[ i ].setText( set_number.toString() ) ;}
+        else for( i = 0 ; i < 5 ; i ++ ) { if( set_number == Integer.parseInt( cardList[ hand_card[ right_player ][ i ] ].number ) ) r_number[ i ].setText( set_number.toString() ) ;}
+
+    }
+
+    public void INFO_PAINT_COLOR( int player_id , int card_id ) {
+
+        // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
+
+            int i ;
+            int set_color = Integer.parseInt( cardList[ card_id ].color ) ;
+
+        if( player_id == my_id ){
+
+            if( set_color == 0 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].color ) == set_color ) m_number[ i ].setBackgroundColor( Color.RED ) ; }
+            else if( set_color == 1 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].color ) == set_color ) m_number[ i ].setBackgroundColor( Color.BLUE ) ; }
+            else if( set_color == 2 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].color ) == set_color ) m_number[ i ].setBackgroundColor( Color.WHITE ) ; }
+            else if( set_color == 3 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].color ) == set_color ) m_number[ i ].setBackgroundColor( Color.YELLOW ) ; }
+            else if( set_color == 4 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].color ) == set_color ) m_number[ i ].setBackgroundColor( Color.GREEN ) ; }
+
+        }
+        else if( player_id == ( ( my_id ) + 1 ) % 3 ){ // left
+
+            if( set_color == 0 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].color ) == set_color ) l_number[ i ].setBackgroundColor( Color.RED ) ; }
+            else if( set_color == 1 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].color ) == set_color ) l_number[ i ].setBackgroundColor( Color.BLUE ) ; }
+            else if( set_color == 2 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].color ) == set_color ) l_number[ i ].setBackgroundColor( Color.WHITE ) ; }
+            else if( set_color == 3 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].color ) == set_color ) l_number[ i ].setBackgroundColor( Color.YELLOW ) ; }
+            else if( set_color == 4 ) for( i = 0 ; i < 5 ; i ++ ) { if( Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].color ) == set_color ) l_number[ i ].setBackgroundColor( Color.GREEN ) ; }
+
+        }
+        else { // right
+
+            if (set_color == 0) for (i = 0; i < 5; i++){ if ( Integer.parseInt( cardList[ hand_card[ right_player ][ i ] ].color ) == set_color) r_number[i].setBackgroundColor(Color.RED); }
+            else if (set_color == 1) for (i = 0; i < 5; i++) { if ( Integer.parseInt( cardList[ hand_card[ right_player ][ i ] ].color ) == set_color) r_number[i].setBackgroundColor(Color.BLUE); }
+            else if (set_color == 2) for (i = 0; i < 5; i++) { if ( Integer.parseInt( cardList[ hand_card[ right_player ][ i ] ].color ) == set_color ) r_number[i].setBackgroundColor(Color.WHITE); }
+            else if (set_color == 3) for (i = 0; i < 5; i++) { if ( Integer.parseInt( cardList[ hand_card[ right_player ][ i ] ].color ) == set_color) r_number[i].setBackgroundColor(Color.YELLOW); }
+            else if (set_color == 4) for (i = 0; i < 5; i++) { if ( Integer.parseInt( cardList[ hand_card[ right_player ][ i ] ].color ) == set_color) r_number[i].setBackgroundColor(Color.GREEN) ; }
+
+        }
+
+    }
 
     public void CARD_THROW( ) { // 내 카드 버리기
         drawCard(my_id, card_num);
@@ -118,30 +212,27 @@ public class InGameActivity extends AppCompatActivity {
 
     public void CARD_SUB( ) { // 내 카드 제출
 
-        card_info sub_card = my_card[ card_num ] ;
+        Card sub_card = cardList[ hand_card[ my_id ][ card_num ] ] ;
 
-        int color = sub_card.Color() ;
-        int number = sub_card.Number() ;
+        int color = Integer.parseInt( sub_card.color ) ;
+        int number = Integer.parseInt( sub_card.number ) ;
 
         if( score_deck[ color ].Number() + 1 == number ) { // O
-            score_deck[ color ].Set( color , number );
 
-            String temp_string = color_array[ score_deck[ color ].Color() ] + score_deck[ color ].Number() ;
-            int resID = getResId( temp_string , R.drawable.class); // or other resource class
-            score_image[ color ].setImageResource( resID ) ;
+            int now_num = hand_card[ my_id ][ card_num ] ;
 
-            drawCard(my_id, card_num);
+            Hashtable<String,String> newCard = new Hashtable<>();
+            newCard.put("color",cardList[now_num].color);
+            newCard.put("number",cardList[now_num].number);
+            newCard.put("position", "submit" );
+            newCard.put("handPosition", "" );
+            boardRef.child(Integer.toString(now_num)).setValue(newCard);
 
-            Integer score = 0 ;
-            for( int i = 0 ; i < 5 ; i ++ ) score += score_deck[ i ].Number() ;
-            score_text.setText( score.toString() );
+            cardList[now_num].position = "submit";
+            cardList[now_num].handPosition = "" ;
 
-            Hashtable<String,String> newLog = new Hashtable<>();
-            newLog.put("logType","submit");
-            newLog.put("hintUser",Integer.toString(my_id));
-            newLog.put("cardID", Integer.toString(sub_card.Idx()));
-            newLog.put("hintType","");
-            logRef.setValue(newLog);
+            drawCard(my_id, card_num) ;
+
         }
         else { // X
             life -- ;
@@ -156,32 +247,8 @@ public class InGameActivity extends AppCompatActivity {
 
         int idx;
         // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
-        if( player == 1 ){ // left
-
-            int i ;
-            int set_color = left_card[ card_num ].Color() ;
-            idx=left_card[card_num].Idx();
-
-            if( set_color == 0 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.RED ) ; }
-            else if( set_color == 1 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.BLUE ) ; }
-            else if( set_color == 2 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.WHITE ) ; }
-            else if( set_color == 3 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.YELLOW ) ; }
-            else if( set_color == 4 ) for( i = 0 ; i < 5 ; i ++ ) { if( left_card[ i ].Color() == set_color ) l_number[ i ].setBackgroundColor( Color.GREEN ) ; }
-
-        }
-        else { // right
-
-            int i;
-            int set_color = right_card[card_num].Color();
-            idx=right_card[card_num].Idx();
-
-            if (set_color == 0) for (i = 0; i < 5; i++){ if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.RED); }
-            else if (set_color == 1) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.BLUE); }
-            else if (set_color == 2) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color ) r_number[i].setBackgroundColor(Color.WHITE); }
-            else if (set_color == 3) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.YELLOW); }
-            else if (set_color == 4) for (i = 0; i < 5; i++) { if (right_card[i].Color() == set_color) r_number[i].setBackgroundColor(Color.GREEN) ; }
-
-        }
+        if( player == 1 )idx = hand_card[ left_player ][ card_num ] ;
+        else idx = hand_card[ right_player ][ card_num ] ;
 
         Hashtable<String,String> newLog = new Hashtable<>();
         newLog.put("logType","hint");
@@ -190,29 +257,14 @@ public class InGameActivity extends AppCompatActivity {
         newLog.put("hintType","color");
         logRef.setValue(newLog);
 
-        }
+    }
 
     public void INFO_NUMBER() { // 숫자 정보
-        int idx;
 
-        if( player == 1 ){ // left
+        int idx ;
 
-            int i ;
-            Integer set_number = left_card[ card_num ].Number() ;
-            idx=left_card[card_num].Idx();
-
-            for( i = 0 ; i < 5 ; i ++ ) { if( set_number == left_card[ i ].Number() ) l_number[ i ].setText( set_number.toString() ) ; }
-
-        }
-        else { // right
-
-            int i ;
-            Integer set_number = right_card[ card_num ].Number() ;
-            idx=right_card[card_num].Idx();
-
-            for( i = 0 ; i < 5 ; i ++ ) { if( set_number == right_card[ i ].Number() ) r_number[ i ].setText( set_number.toString() ) ; }
-
-        }
+        if( player == 1 ) idx = hand_card[ left_player ][ card_num ] ;
+        else idx = hand_card[ right_player ][ card_num ] ;
 
         Hashtable<String,String> newLog = new Hashtable<>();
         newLog.put("logType","hint");
@@ -220,7 +272,9 @@ public class InGameActivity extends AppCompatActivity {
         newLog.put("cardID", Integer.toString(idx));
         newLog.put("hintType","number");
         logRef.setValue(newLog);
+
     }
+
     public void nextTurn() {
         Hashtable<String,String> newLog = new Hashtable<>();
         newLog.put("logType","nextTurn");
@@ -241,11 +295,11 @@ public class InGameActivity extends AppCompatActivity {
         Hashtable<String,String> newCard = new Hashtable<>();
         newCard.put("color",cardList[randCardID].color);
         newCard.put("number",cardList[randCardID].number);
-        newCard.put("position", Integer.toString(playerID+1));
+        newCard.put("position", Integer.toString(playerID));
         newCard.put("handPosition",Integer.toString(playerHand));
         boardRef.child(Integer.toString(randCardID)).setValue(newCard);
 
-        cardList[randCardID].position = Integer.toString(playerID+1);
+        cardList[randCardID].position = Integer.toString(playerID);
         cardList[randCardID].handPosition = Integer.toString(playerHand);
     }
 
@@ -269,15 +323,15 @@ public class InGameActivity extends AppCompatActivity {
 
             String color;
             if(i<10)
-                color = "red";
+                color = "0";
             else if (i<20)
-                color = "blue";
+                color = "1";
             else if (i<30)
-                color = "white";
+                color = "2";
             else if (i<40)
-                color = "yellow";
+                color = "3";
             else
-                color = "green";
+                color = "4";
             cardList[i].color = color;
 
             String number;
@@ -291,7 +345,7 @@ public class InGameActivity extends AppCompatActivity {
                 number = "4";
             else
                 number = "5";
-            cardList[i].number = number;
+            cardList[i].number = number ;
             cardList[i].position = "deck";
             cardList[i].handPosition = "";
         }
@@ -338,9 +392,12 @@ public class InGameActivity extends AppCompatActivity {
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Card card = snapshot.getValue(Card.class);
 
-                cardList[Integer.parseInt(snapshot.getKey())] = card;
+                int now = Integer.parseInt( snapshot.getKey() ) ;
+                cardList[ now ] = card;
+                CARD_PAINT( now ) ;
 
                 //if(card.position.equals())
+
             }
 
             @Override
@@ -370,25 +427,15 @@ public class InGameActivity extends AppCompatActivity {
                     my_id = 0;
                 }
                 else if(newUser.p2.equals(id)) {
-                    my_id = 1;
+                    my_id = 1 ;
                 }
                 else if (newUser.p3.equals(id)) {
-                    my_id = 2;
+                    my_id = 2 ;
                 }
 
                 // id
-                if( my_id == 0 ){
-                    right_player = 2 ;
-                    left_player = 1 ;
-                }
-                else if( my_id == 1 ){
-                    left_player = 2 ;
-                    right_player = 0 ;
-                }
-                else {
-                    left_player = 0 ;
-                    right_player = 1 ;
-                }
+                left_player = ( my_id + 1 ) % 3 ;
+                right_player = ( my_id + 2 ) % 3 ;
                 //
 
                 if(newUser.p2Ready.equals("true")) {
@@ -427,30 +474,22 @@ public class InGameActivity extends AppCompatActivity {
                     newLog = new Log();
 
                 if(newLog.logType.equals("hint")) {
-                    if(newLog.hintUser.equals("0")) {
-                        if(newLog.hintType.equals("color")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].color
-                        }
-                        else if (newLog.hintType.equals("number")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].number
-                        }
+                    if(newLog.hintType.equals("color")) {
+                        int h_U = Integer.parseInt(newLog.hintUser) ;
+                        int card_id = Integer.parseInt(newLog.cardID) ;
+                        INFO_PAINT_COLOR( h_U , card_id );
+
+                        //cardList[Integer.parseInt(newLog.cardID)].color
                     }
-                    else if(newLog.hintUser.equals("1")) {
-                        if(newLog.hintType.equals("color")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].color
-                        }
-                        else if (newLog.hintType.equals("number")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].number
-                        }
+                    else if (newLog.hintType.equals("number")) {
+
+                        int h_U = Integer.parseInt(newLog.hintUser) ;
+                        int card_id = Integer.parseInt(newLog.cardID) ;
+                        INFO_PAINT_NUMBER( h_U , card_id );
+
+                        //cardList[Integer.parseInt(newLog.cardID)].number
                     }
-                    else if(newLog.hintUser.equals("2")) {
-                        if(newLog.hintType.equals("color")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].color
-                        }
-                        else if (newLog.hintType.equals("number")) {
-                            //cardList[Integer.parseInt(newLog.cardID)].number
-                        }
-                    }
+
                 }/*
                 else if(newLog.logType.equals("submit")) {  //hintType에 제출한 handPosition을 저장 (따로 만들어도 됨)
                     if(cardList[Integer.parseInt(newLog.cardID)].position.equals('p'+newLog.hintUser)               //제출한 카드가 hintUser에게 있는 카드인지 확인
@@ -504,12 +543,17 @@ public class InGameActivity extends AppCompatActivity {
 
         }
 
+
+
         for( int i = 0 ; i <  5 ; i ++ ) {
 
-            my_card[ i ] = new card_info() ;
-            right_card[ i ] = new card_info() ;
-            left_card[ i ] = new card_info() ;
+            /*
+            hand_card[ my_id ][ i ] = new int ;
+            hand_card[ right_player ][ i ] = new int ;
+            hand_card[ left_player ][ i ] = new int ;
+             */
             score_deck[ i ] = new card_info() ;
+            score_deck[ i ].Set( i , 0 ) ;
 
             left_image[ i ] = (ImageView) findViewById(Rid_left[ i ] ) ;
             l_number[ i ] = (TextView) findViewById(Rid_l_n[ i ] ) ;
@@ -525,52 +569,47 @@ public class InGameActivity extends AppCompatActivity {
 
         }
 
-        /* 임시 데이터 */
+        if(my_id == 0) {
 
-        Random ranint = new Random() ;
 
-        left_card[ 0 ].Set( 0 , 1 ) ;
-        temp_string = color_array[ left_card[ 0 ].Color() ] + Integer.toString(left_card[ 0 ].Number()) ;
-        int resID = getResId( temp_string , R.drawable.class); // or other resource class
-        left_image[ 0 ].setImageResource( resID );
-
-        for( int i = 0 ; i < 5 ; i ++ ) {
-
-            int temp = ranint.nextInt(5 ) ;
-            left_card[ i ].Set( temp , temp + 1 ) ;
-            temp_string = color_array[ left_card[ i ].Color() ] + Integer.toString(left_card[ i ].Number()) ;
-            resID = getResId( temp_string , R.drawable.class); // or other resource class
-            left_image[ i ].setImageResource( resID );
-
-            if(my_id == 1) {
-                for(int _i=0;_i<3;_i++)
+            for(int _i=0;_i<3;_i++)
+            {
+                for(int _j=0;_j<5;_j++)
                 {
-                    for(int _j=0;_j<5;_j++)
-                    {
-                        drawCard(_i,_j);
-                    }
-
+                    drawCard(_i,_j);
                 }
 
             }
 
+        }
+
+        /* 임시 데이터 */
+/*
+        Random ranint = new Random() ;
+        for( int i = 0 ; i < 5 ; i ++ ) {
+
+            int temp = ranint.nextInt(5 ) ;
+            hand_card[ left_player ][ i ].Set( temp , temp + 1 ) ;
+            temp_string = color_array[ hand_card[ left_player ][ i ].Color() ] + Integer.toString(hand_card[ left_player ][ i ].Number()) ;
+            resID = getResId( temp_string , R.drawable.class); // or other resource class
+            left_image[ i ].setImageResource( resID );
 
             temp = ranint.nextInt(5 ) ;
-            right_card[ i ].Set( temp , temp + 1 ) ;
-            temp_string = color_array[ right_card[ i ].Color() ] + Integer.toString( right_card[ i ].Number()) ;
+            hand_card[ right_player ][ i ].Set( temp , temp + 1 ) ;
+            temp_string = color_array[ hand_card[ right_player ][ i ].Color() ] + Integer.toString( hand_card[ right_player ][ i ].Number()) ;
             resID = getResId( temp_string , R.drawable.class); // or other resource class
             right_image[ i ].setImageResource( resID );
 
             temp = ranint.nextInt(5 ) ;
-            my_card[ i ].Set( temp , temp + 1 ) ;
-            temp_string = color_array[ my_card[ i ].Color() ] + Integer.toString(my_card[ i ].Number()) ;
+            hand_card[ my_id ][ i ].Set( temp , temp + 1 ) ;
+            temp_string = color_array[ hand_card[ my_id ][ i ].Color() ] + Integer.toString(hand_card[ my_id ][ i ].Number()) ;
             resID = getResId( temp_string , R.drawable.class); // or other resource class
             my_image[ i ].setImageResource( resID );
 
             score_deck[ i ].Set( 0 , 0 ) ;
 
         }
-
+ */
 
         score_text = (TextView) findViewById(R.id.score_text) ;
 
@@ -674,6 +713,7 @@ public class InGameActivity extends AppCompatActivity {
                 else if( sub_or_throw == 1 ) { // 카드 제출
 
                     CARD_SUB() ;
+
                 }
 
             }
@@ -684,6 +724,7 @@ public class InGameActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 step4.setVisibility(View.INVISIBLE);
+
                 switch (view.getId()) {
                     case R.id.step4_color:
                         INFO_COLOR();
@@ -691,7 +732,7 @@ public class InGameActivity extends AppCompatActivity {
                     case R.id.step4_number:
                         INFO_NUMBER();
                         break;
-                    }
+                }
 
 
             }
