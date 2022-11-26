@@ -709,11 +709,13 @@ public class InGameActivity extends AppCompatActivity {
 
                     CARD_THROW();
 
+                    nextTurn();
                 }
                 else if( sub_or_throw == 1 ) { // 카드 제출
 
                     CARD_SUB() ;
 
+                    nextTurn();
                 }
 
             }
@@ -734,6 +736,7 @@ public class InGameActivity extends AppCompatActivity {
                         break;
                 }
 
+                nextTurn();
 
             }
 
