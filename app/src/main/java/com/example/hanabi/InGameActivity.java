@@ -581,6 +581,8 @@ public class InGameActivity extends AppCompatActivity {
 
             }
 
+            step1.setVisibility( View.VISIBLE );
+
         }
 
         /* 임시 데이터 */
