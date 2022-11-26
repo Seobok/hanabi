@@ -569,22 +569,6 @@ public class InGameActivity extends AppCompatActivity {
 
         }
 
-        if(my_id == 0) {
-
-
-            for(int _i=0;_i<3;_i++)
-            {
-                for(int _j=0;_j<5;_j++)
-                {
-                    drawCard(_i,_j);
-                }
-
-            }
-
-            step1.setVisibility( View.VISIBLE );
-
-        }
-
         /* 임시 데이터 */
 /*
         Random ranint = new Random() ;
@@ -638,6 +622,22 @@ public class InGameActivity extends AppCompatActivity {
 
         step4_color = (Button) findViewById(R.id.step4_color) ;
         step4_number = (Button) findViewById(R.id.step4_number) ;
+
+        if(my_id == 0) {
+
+
+            for(int _i=0;_i<3;_i++)
+            {
+                for(int _j=0;_j<5;_j++)
+                {
+                    drawCard(_i,_j);
+                }
+
+            }
+
+            step1.setVisibility( View.VISIBLE );
+
+        }
 
 
         step1_O = new Button.OnClickListener() {
