@@ -10,6 +10,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -84,6 +85,11 @@ public class InGameActivity extends AppCompatActivity {
 
     ImageView score_image[] = new ImageView[5];
     Integer[] Rid_score = {R.id.s1_image, R.id.s2_image, R.id.s3_image, R.id.s4_image, R.id.s5_image};
+
+    LinearLayout ready_layout, p2Image, p3Image;
+    ImageButton btnReady;
+    TextView p1name, p2name, p3name;
+
 
     TextView score_text;
 
@@ -359,6 +365,14 @@ public class InGameActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.in_game);
 
+        ready_layout = (LinearLayout) findViewById(R.id.ready_layout);
+        p2Image = (LinearLayout) findViewById(R.id.p2Image);
+        p3Image = (LinearLayout) findViewById(R.id.p3Image);
+        btnReady = (ImageButton) findViewById(R.id.btnReady);
+        p1name = (TextView) findViewById(R.id.p1name);
+        p2name = (TextView) findViewById(R.id.p2name);
+        p3name = (TextView) findViewById(R.id.p3name);
+
         // <-- firebase initialize
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance("https://hanabi-ea7e9-default-rtdb.asia-southeast1.firebasedatabase.app/");
@@ -425,12 +439,15 @@ public class InGameActivity extends AppCompatActivity {
 
                 if(newUser.p1.equals(id)) {
                     my_id = 0;
+                    p1name.setText(newUser.p1);
                 }
                 else if(newUser.p2.equals(id)) {
                     my_id = 1 ;
+                    p2name.setText(newUser.p2);
                 }
                 else if (newUser.p3.equals(id)) {
                     my_id = 2 ;
+                    p3name.setText(newUser.p3);
                 }
 
                 // id
@@ -439,25 +456,23 @@ public class InGameActivity extends AppCompatActivity {
                 //
 
                 if(newUser.p2Ready.equals("true")) {
-                    //TODO p2Ready 이미지 생성
+                    p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername_ready));
                 }
                 else {
-                    //TODO p2Ready 이미지 제거
+                    p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername));
                 }
 
                 if(newUser.p3Ready.equals("true")) {
-                    //TODO p3Ready 이미지 생성
+                    p3Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername_ready));
                 }
                 else {
-                    //TODO p3Ready 이미지 제거
+                    p3Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername));
                 }
 
-                if(newUser.p2Ready.equals("true") && newUser.p3Ready.equals("true")) {
-                    //TODO 게임시작버튼 생성
-                }
-                else {
-                    //TODO 게임시작버튼 제거
-                }
+
+                p1name.setText(newUser.p1);
+                p2name.setText(newUser.p2);
+                p3name.setText(newUser.p3);
             }
 
             @Override
@@ -527,6 +542,46 @@ public class InGameActivity extends AppCompatActivity {
             }
         });
         //-->
+
+        btnReady.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(my_id == 0) {
+                    if(user.p2Ready.equals("true") && user.p3Ready.equals("true")) {
+                        roomRef.child("isGameStart").setValue("true");
+                        ready_layout.setVisibility(View.INVISIBLE);
+                        //TODO 게임시작
+                    }
+                    else {
+                        Toast.makeText(InGameActivity.this, "아직 준비되지 않은 플레이어가 있습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if (my_id == 1) {
+                    if(user.p2Ready.equals("false")) {
+                        user.p2Ready="true";
+                        userRef.child("p2Ready").setValue("true");
+                        p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername_ready));
+                    }
+                    else {
+                        user.p2Ready="false";
+                        userRef.child("p2Ready").setValue("false");
+                        p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername));
+                    }
+                }
+                else if (my_id == 2) {
+                    if(user.p2Ready.equals("false")) {
+                        user.p2Ready="true";
+                        userRef.child("p3Ready").setValue("true");
+                        p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername_ready));
+                    }
+                    else {
+                        user.p2Ready="false";
+                        userRef.child("p3Ready").setValue("false");
+                        p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername));
+                    }
+                }
+            }
+        });
 
         for( int i = 0 ; i < 10 ; i ++ ) {
 
