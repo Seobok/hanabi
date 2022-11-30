@@ -396,6 +396,22 @@ public class InGameActivity extends AppCompatActivity {
         initCardList();
 
         //<-- reference listener
+        roomRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Room newRoom = snapshot.getValue(Room.class);
+                if(newRoom.isGameStart.equals("true"))
+                {
+                    ready_layout.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         boardRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -534,6 +550,10 @@ public class InGameActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 life = snapshot.getValue(Integer.class);
+                if(life == 0)
+                {
+                    //TODO 게임오버
+                }
             }
 
             @Override
@@ -569,15 +589,15 @@ public class InGameActivity extends AppCompatActivity {
                     }
                 }
                 else if (my_id == 2) {
-                    if(user.p2Ready.equals("false")) {
-                        user.p2Ready="true";
+                    if(user.p3Ready.equals("false")) {
+                        user.p3Ready="true";
                         userRef.child("p3Ready").setValue("true");
-                        p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername_ready));
+                        p3Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername_ready));
                     }
                     else {
-                        user.p2Ready="false";
+                        user.p3Ready="false";
                         userRef.child("p3Ready").setValue("false");
-                        p2Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername));
+                        p3Image.setBackground(getResources().getDrawable(R.drawable.ingame_playername));
                     }
                 }
             }
