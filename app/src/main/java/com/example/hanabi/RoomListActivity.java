@@ -90,8 +90,11 @@ public class RoomListActivity extends Activity {
                     Log.d("TAG","updateRef addListener roomIsNULL");
                     return;
                 }
-                room.roomNumber = snapshot.getKey();
-                adapter.roomList.add(room);
+                if(room.isGameStart.equals("false"))
+                {
+                    room.roomNumber = snapshot.getKey();
+                    adapter.roomList.add(room);
+                }
                 adapter.notifyDataSetChanged();
             }
 
