@@ -1261,7 +1261,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/gameclear_background"
         android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/totalscore_txt"
