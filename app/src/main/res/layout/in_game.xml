@@ -1235,4 +1235,53 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/gameover_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gameover_background"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <ImageButton
+            android:id="@+id/gameover_btn"
+            android:layout_width="313dp"
+            android:layout_height="101dp"
+            android:layout_marginBottom="50dp"
+            android:width="200dp"
+            android:background="@drawable/gameover_btn"
+            android:text="Button"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gameclear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gameclear_background"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/totalscore_txt"
+            android:layout_width="664dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:fontFamily="sans-serif-black"
+            android:text="총 점수 :"
+            android:textColor="@color/white"
+            android:textSize="48sp" />
+
+        <ImageButton
+            android:id="@+id/gameclear_btn"
+            android:layout_width="313dp"
+            android:layout_height="101dp"
+            android:layout_marginBottom="50dp"
+            android:width="200dp"
+            android:background="@drawable/gameover_btn"
+            android:text="Button"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
+
 </RelativeLayout>

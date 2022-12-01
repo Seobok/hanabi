@@ -91,6 +91,14 @@ public class InGameActivity extends AppCompatActivity {
     LinearLayout ready_layout, p2Image, p3Image , dump_card ;
     ImageButton btnReady;
     TextView p1name, p2name, p3name;
+
+    LinearLayout gameoverLayout;
+    ImageButton gameoverBtn;
+
+    LinearLayout gameclearLayout;
+    ImageButton gameclearBtn;
+    TextView totalscoreTxt;
+
     Switch dump_switch ;
 
     TextView score_text;
@@ -441,6 +449,13 @@ public class InGameActivity extends AppCompatActivity {
         p2name = (TextView) findViewById(R.id.p2name);
         p3name = (TextView) findViewById(R.id.p3name);
 
+        gameoverLayout = (LinearLayout) findViewById(R.id.gameover_layout);
+        gameoverBtn = (ImageButton) findViewById(R.id.gameover_btn);
+
+        gameclearLayout = (LinearLayout) findViewById(R.id.gameclear_layout);
+        gameclearBtn = (ImageButton) findViewById(R.id.gameclear_btn);
+        totalscoreTxt = (TextView) findViewById(R.id.totalscore_txt);
+
         // <-- firebase initialize
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance("https://hanabi-ea7e9-default-rtdb.asia-southeast1.firebasedatabase.app/");
@@ -620,6 +635,7 @@ public class InGameActivity extends AppCompatActivity {
                 life = snapshot.getValue(Integer.class);
                 if(life == 0)
                 {
+                    gameoverLayout.setVisibility(View.VISIBLE);
                     //TODO 게임오버
                 }
             }
@@ -680,6 +696,20 @@ public class InGameActivity extends AppCompatActivity {
                 }
             }
         }) ;
+
+        gameoverBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        gameclearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         for( int i = 0 ; i < 10 ; i ++ ) {
 
