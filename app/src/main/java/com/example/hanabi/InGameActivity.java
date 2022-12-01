@@ -638,7 +638,17 @@ public class InGameActivity extends AppCompatActivity {
                     if(user.p2Ready.equals("true") && user.p3Ready.equals("true")) {
                         roomRef.child("isGameStart").setValue("true");
                         ready_layout.setVisibility(View.INVISIBLE);
-                        //TODO 게임시작
+
+                        for(int _i=0;_i<3;_i++)
+                        {
+                            for(int _j=0;_j<5;_j++)
+                            {
+                                drawCard(_i,_j);
+                            }
+
+                        }
+
+                        step1.setVisibility( View.VISIBLE );
                     }
                     else {
                         Toast.makeText(InGameActivity.this, "아직 준비되지 않은 플레이어가 있습니다.", Toast.LENGTH_SHORT).show();
@@ -691,9 +701,9 @@ public class InGameActivity extends AppCompatActivity {
 
         }
 
-        dump_card.setBackgroundColor(Color.GRAY);
         dump_switch = (Switch) findViewById( R.id.dump_switch ) ;
         dump_card = (LinearLayout) findViewById( R.id.dump_card ) ;
+        dump_card.setBackgroundColor(Color.GRAY);
 
         dump_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -786,22 +796,6 @@ public class InGameActivity extends AppCompatActivity {
 
         step4_color = (Button) findViewById(R.id.step4_color) ;
         step4_number = (Button) findViewById(R.id.step4_number) ;
-
-        if(my_id == 0) {
-
-
-            for(int _i=0;_i<3;_i++)
-            {
-                for(int _j=0;_j<5;_j++)
-                {
-                    drawCard(_i,_j);
-                }
-
-            }
-
-            step1.setVisibility( View.VISIBLE );
-
-        }
 
 
         step1_O = new Button.OnClickListener() {
