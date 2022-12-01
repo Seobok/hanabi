@@ -10,9 +10,11 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,10 +88,10 @@ public class InGameActivity extends AppCompatActivity {
     ImageView score_image[] = new ImageView[5];
     Integer[] Rid_score = {R.id.s1_image, R.id.s2_image, R.id.s3_image, R.id.s4_image, R.id.s5_image};
 
-    LinearLayout ready_layout, p2Image, p3Image;
+    LinearLayout ready_layout, p2Image, p3Image , dump_card ;
     ImageButton btnReady;
     TextView p1name, p2name, p3name;
-
+    Switch dump_switch ;
 
     TextView score_text;
 
@@ -120,6 +122,7 @@ public class InGameActivity extends AppCompatActivity {
         Card now = cardList[ card_id ] ;
         int color = Integer.parseInt( now.color ) ;
         int number = Integer.parseInt( now.number ) ;
+        String chk = now.number ;
 
         if( temp.equals("submit")) {
 
@@ -136,6 +139,53 @@ public class InGameActivity extends AppCompatActivity {
         }
         else if ( temp.equals("dump") ) {
 
+            int number_start = 0 ;
+            if( number == 1 ) number_start = 0 ;
+            if( number == 2 ) number_start = 3 ;
+            if( number == 3 ) number_start = 5 ;
+            if( number == 4 ) number_start = 7 ;
+            if( number == 5 ) number_start = 9 ;
+
+            int i = number_start ;
+            // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
+
+            if( color == 0 ) {
+                while( dump_red[ i ].getText().equals(chk) ) {
+                    i ++ ;
+                }
+               dump_red[ i ].setText( chk ) ;
+            }
+
+
+            if( color == 1 ) {
+                while( dump_blue[ i ].getText().equals(chk) ) {
+                    i ++ ;
+                }
+                dump_blue[ i ].setText( chk ) ;
+            }
+
+
+            if( color == 2 ) {
+                while( dump_white[ i ].getText().equals(chk) ) {
+                    i ++ ;
+                }
+                dump_white[ i ].setText( chk ) ;
+            }
+
+            if( color == 3 ) {
+                while( dump_y[ i ].getText().equals(chk) ) {
+                    i ++ ;
+                }
+                dump_y[ i ].setText( chk ) ;
+            }
+
+            if( color == 4 ) {
+                while( dump_green[ i ].getText().equals(chk) ) {
+                    i ++ ;
+                }
+                dump_green[ i ].setText( chk ) ;
+            }
+
         }
         else {
 
@@ -148,16 +198,20 @@ public class InGameActivity extends AppCompatActivity {
             hand_card[ player_id ][ h_P ] = ( card_id ) ;
 
             if( player_id == my_id ){
-                my_image[ h_P ].setImageResource(resID);
-                m_number[ h_P ].setText( temp_string );
+              //  my_image[ h_P ].setImageResource(resID);
+                m_number[ h_P ].setText( "" );
+                m_number[ h_P ].setBackgroundColor( Color.GRAY );
             }
             else if( player_id == ( my_id + 1 ) % 3 ){
+
                 left_image[ h_P ].setImageResource(resID);
-                l_number[ h_P ].setText( temp_string );
+                l_number[ h_P ].setText( "" );
+                l_number[ h_P ].setBackgroundColor( Color.GRAY );
             }
             else{
                 right_image[ h_P ].setImageResource(resID);
-                r_number[ h_P ].setText( temp_string );
+                r_number[ h_P ].setText( "" );
+                r_number[ h_P ].setBackgroundColor( Color.GRAY ) ;
             }
 
         }
@@ -213,7 +267,22 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void CARD_THROW( ) { // 내 카드 버리기
-        drawCard(my_id, card_num);
+
+
+        int now_num = hand_card[ my_id ][ card_num ] ;
+
+        Hashtable<String,String> newCard = new Hashtable<>();
+        newCard.put("color",cardList[now_num].color);
+        newCard.put("number",cardList[now_num].number);
+        newCard.put("position", "dump" );
+        newCard.put("handPosition", "" );
+        boardRef.child(Integer.toString(now_num)).setValue(newCard);
+
+        cardList[now_num].position = "dump";
+        cardList[now_num].handPosition = "" ;
+
+        drawCard(my_id, card_num) ;
+
     }
 
     public void CARD_SUB( ) { // 내 카드 제출
@@ -243,7 +312,6 @@ public class InGameActivity extends AppCompatActivity {
         else { // X
             life -- ;
             CARD_THROW() ;
-
             lifeRef.setValue(life);
         }
 
@@ -601,24 +669,45 @@ public class InGameActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        }) ;
 
         for( int i = 0 ; i < 10 ; i ++ ) {
 
             dump_blue[ i ] = (TextView) findViewById(Rid_dump_blue[ i ]) ;
             dump_blue[ i ].setTextColor( Color.BLUE );
+            dump_blue[ i ].setText( "" ) ;
             dump_green[ i ] = (TextView) findViewById(Rid_dump_green[ i ]) ;
             dump_green[ i ].setTextColor( Color.GREEN );
+            dump_green[ i ].setText( "" ) ;
             dump_red[ i ] = (TextView) findViewById(Rid_dump_red[ i ]) ;
             dump_red[ i ].setTextColor( Color.RED );
+            dump_red[ i ].setText( "" ) ;
             dump_y[ i ] = (TextView) findViewById(Rid_dump_y[ i ]) ;
             dump_y[ i ].setTextColor( Color.YELLOW );
+            dump_y[ i ].setText( "" ) ;
             dump_white[ i ] = (TextView) findViewById(Rid_dump_white[ i ]) ;
             dump_white[ i ].setTextColor( Color.WHITE );
+            dump_white[ i ].setText( "" ) ;
 
         }
 
+        dump_card.setBackgroundColor(Color.GRAY);
+        dump_switch = (Switch) findViewById( R.id.dump_switch ) ;
+        dump_card = (LinearLayout) findViewById( R.id.dump_card ) ;
 
+        dump_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if( b ){
+                    dump_card.setVisibility( View.VISIBLE ) ;
+                }
+                else{
+                    dump_card.setVisibility( View.INVISIBLE ) ;
+                }
+
+            }
+        });
 
         for( int i = 0 ; i <  5 ; i ++ ) {
 
