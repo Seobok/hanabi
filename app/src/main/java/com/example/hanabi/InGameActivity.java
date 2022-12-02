@@ -87,6 +87,7 @@ public class InGameActivity extends AppCompatActivity {
 
     ImageView score_image[] = new ImageView[5];
     Integer[] Rid_score = {R.id.s1_image, R.id.s2_image, R.id.s3_image, R.id.s4_image, R.id.s5_image};
+    TextView deck_num ;
 
     LinearLayout ready_layout, p2Image, p3Image , dump_card ;
     ImageButton btnReady;
@@ -101,21 +102,23 @@ public class InGameActivity extends AppCompatActivity {
 
     Switch dump_switch ;
 
-    TextView score_text;
+    TextView life_text , hint_text ;
 
     Button step1_info, step1_submission;
     Button step2_throw, step2_sub, step2_left_player, step2_right_player;
     Button step3_number_1, step3_number_2, step3_number_3, step3_number_4, step3_number_5;
     Button step4_color, step4_number;
     Button.OnClickListener step1_O, step_number, step4_0;
+    Button step2_back , step2_lr_back , step3_back , step4_back ;
 
     Boolean step4_check;
 
-    int life = 3;
+    int life = 3 , hint = 8 ;
     int card_num, player;
     // player left : 1 , right : 2
     int sub_or_throw;
-    int left_player, right_player, my_id;
+    int left_player, right_player, my_id ;
+    int card_count = 0 ;
 
     LinearLayout step1, step2_submission, step2_info, step4, step3_number;
 
@@ -136,9 +139,10 @@ public class InGameActivity extends AppCompatActivity {
 
             score_deck[ color ].Set( color , number );
 
-            Integer score = 0 ;
-            for( int i = 0 ; i < 5 ; i ++ ) score += score_deck[ i ].Number() ;
-            score_text.setText( score.toString() );
+            if( number == 4 ){
+                hint ++ ;
+                hint_text.setText( hint ) ;
+            }
 
             temp_string = color_array[ score_deck[ color ].Color() ] + score_deck[ color ].Number() ;
             int resID = getResId( temp_string , R.drawable.class); // or other resource class
@@ -153,6 +157,11 @@ public class InGameActivity extends AppCompatActivity {
             if( number == 3 ) number_start = 5 ;
             if( number == 4 ) number_start = 7 ;
             if( number == 5 ) number_start = 9 ;
+
+            if( now.handPosition.equals("1")){
+                hint ++ ;
+                hint_text.setText( hint ) ;
+            }
 
             int i = number_start ;
             // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
@@ -197,6 +206,10 @@ public class InGameActivity extends AppCompatActivity {
         }
         else {
 
+            card_count ++ ;
+            Integer print_deck = 50 - card_count ;
+            deck_num.setText( print_deck.toString() ) ;
+
             int player_id = Integer.parseInt( temp ) ;
             int h_P = Integer.parseInt( now.handPosition ) ;
 
@@ -228,8 +241,10 @@ public class InGameActivity extends AppCompatActivity {
 
     public void INFO_PAINT_NUMBER( int player_id , int card_id ) {
 
+        hint -- ;
         int i ;
         Integer set_number = Integer.parseInt( cardList[ card_id ].number ) ;
+        hint_text.setText( hint ) ;
 
         if( player_id == my_id ) for( i = 0 ; i < 5 ; i ++ ) { if( set_number == Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].number ) ) m_number[ i ].setText( set_number.toString() ) ; }
         else if( player_id == ( ( my_id ) + 1 ) % 3 ) for( i = 0 ; i < 5 ; i ++ ) { if( set_number == Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].number ) ) l_number[ i ].setText( set_number.toString() ) ;}
@@ -241,8 +256,10 @@ public class InGameActivity extends AppCompatActivity {
 
         // 0 : red , 1 : blue , 2 : white , 3 : yellow , 4 : green 5 : ~
 
-            int i ;
-            int set_color = Integer.parseInt( cardList[ card_id ].color ) ;
+        int i ;
+        int set_color = Integer.parseInt( cardList[ card_id ].color ) ;
+        hint -- ;
+        hint_text.setText( hint ) ;
 
         if( player_id == my_id ){
 
@@ -274,8 +291,7 @@ public class InGameActivity extends AppCompatActivity {
 
     }
 
-    public void CARD_THROW( ) { // 내 카드 버리기
-
+    public void CARD_THROW( Integer a ) { // 카드 버리기
 
         int now_num = hand_card[ my_id ][ card_num ] ;
 
@@ -283,17 +299,17 @@ public class InGameActivity extends AppCompatActivity {
         newCard.put("color",cardList[now_num].color);
         newCard.put("number",cardList[now_num].number);
         newCard.put("position", "dump" );
-        newCard.put("handPosition", "" );
+        newCard.put("handPosition", a.toString() );
         boardRef.child(Integer.toString(now_num)).setValue(newCard);
 
         cardList[now_num].position = "dump";
-        cardList[now_num].handPosition = "" ;
+        cardList[now_num].handPosition = a.toString() ;
 
         drawCard(my_id, card_num) ;
 
     }
 
-    public void CARD_SUB( ) { // 내 카드 제출
+    public void CARD_SUB( ) { // 카드 제출
 
         Card sub_card = cardList[ hand_card[ my_id ][ card_num ] ] ;
 
@@ -319,8 +335,8 @@ public class InGameActivity extends AppCompatActivity {
         }
         else { // X
             life -- ;
-            CARD_THROW() ;
-            lifeRef.setValue(life);
+            CARD_THROW( 0 ) ;
+            lifeRef.setValue( life ) ;
         }
 
     }
@@ -627,12 +643,13 @@ public class InGameActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        } ) ;
 
         lifeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                life = snapshot.getValue(Integer.class);
+                life = snapshot.getValue(Integer.class) ;
+                life_text.setText( Integer.toString(life) ) ;
                 if(life == 0)
                 {
                     gameoverLayout.setVisibility(View.VISIBLE);
@@ -663,7 +680,6 @@ public class InGameActivity extends AppCompatActivity {
                             }
 
                         }
-
                         step1.setVisibility( View.VISIBLE );
                     }
                     else {
@@ -773,6 +789,8 @@ public class InGameActivity extends AppCompatActivity {
 
         }
 
+        deck_num = (TextView) findViewById(R.id.deck_num ) ;
+
         /* 임시 데이터 */
 /*
         Random ranint = new Random() ;
@@ -801,7 +819,8 @@ public class InGameActivity extends AppCompatActivity {
         }
  */
 
-        score_text = (TextView) findViewById(R.id.score_text) ;
+        hint_text = (TextView) findViewById(R.id.hint_text) ;
+        life_text = (TextView) findViewById(R.id.life_text) ;
 
         step1 = (LinearLayout) findViewById(R.id.step1 );
         step2_info = (LinearLayout) findViewById(R.id.step2_info );
@@ -827,6 +846,10 @@ public class InGameActivity extends AppCompatActivity {
         step4_color = (Button) findViewById(R.id.step4_color) ;
         step4_number = (Button) findViewById(R.id.step4_number) ;
 
+        step2_lr_back = (Button) findViewById(R.id.step2_lr_back) ;
+        step2_back = (Button) findViewById(R.id.step2_back) ;
+        step3_back = (Button) findViewById(R.id.step3_back) ;
+        step4_back = (Button) findViewById(R.id.step4_back) ;
 
         step1_O = new Button.OnClickListener() {
             @Override
@@ -834,9 +857,14 @@ public class InGameActivity extends AppCompatActivity {
 
                 switch (view.getId()) {
                     case R.id.step1_info:
-                        step2_info.setVisibility(View.VISIBLE);
-                        step1.setVisibility(View.INVISIBLE);
-                        card_num = player = -1 ;
+                        if( hint != 0 ) {
+                            step2_info.setVisibility(View.VISIBLE);
+                            step1.setVisibility(View.INVISIBLE);
+                            card_num = player = -1 ;
+                        }
+                        else {
+                            Toast.makeText(InGameActivity.this, "남은 힌트가 없습니다!", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case R.id.step1_submission:
                         step2_submission.setVisibility(View.VISIBLE);
@@ -865,6 +893,14 @@ public class InGameActivity extends AppCompatActivity {
                         step2_submission.setVisibility(View.INVISIBLE);
                         sub_or_throw = 1 ;
                         break ;
+                    case R.id.step2_lr_back:
+                        step1.setVisibility(View.VISIBLE) ;
+                        step2_info.setVisibility(View.INVISIBLE);
+                        break ;
+                    case R.id.step2_back:
+                        step1.setVisibility(View.VISIBLE) ;
+                        step2_submission.setVisibility(View.INVISIBLE);
+                        break ;
                 }
 
             }
@@ -873,6 +909,8 @@ public class InGameActivity extends AppCompatActivity {
         step_number = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                boolean Chk = true ;
 
                 step3_number.setVisibility(View.INVISIBLE) ;
                 switch (view.getId()) {
@@ -891,21 +929,30 @@ public class InGameActivity extends AppCompatActivity {
                     case R.id.step3_number_5:
                         card_num = 4 ;
                         break ;
+                    case R.id.step3_back:
+                        Chk = false ;
+                        if( step4_check ){
+                            step2_info.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            step2_submission.setVisibility(View.VISIBLE) ;
+                        }
+                        break ;
+
                 }
 
-                if( step4_check == true )
-                    step4.setVisibility(View.VISIBLE);
-                else if( sub_or_throw == -1 ) { // 카드 버림
+                if( Chk ) {
+                    if (step4_check == true)
+                        step4.setVisibility(View.VISIBLE);
+                    else if (sub_or_throw == -1) { // 카드 버림
 
-                    CARD_THROW();
+                        CARD_THROW(1);
+                        nextTurn();
+                    } else if (sub_or_throw == 1) { // 카드 제출
 
-                    nextTurn();
-                }
-                else if( sub_or_throw == 1 ) { // 카드 제출
-
-                    CARD_SUB() ;
-
-                    nextTurn();
+                        CARD_SUB();
+                        nextTurn();
+                    }
                 }
 
             }
@@ -916,6 +963,7 @@ public class InGameActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 step4.setVisibility(View.INVISIBLE);
+                boolean Chk = true ;
 
                 switch (view.getId()) {
                     case R.id.step4_color:
@@ -924,13 +972,18 @@ public class InGameActivity extends AppCompatActivity {
                     case R.id.step4_number:
                         INFO_NUMBER();
                         break;
+                    case R.id.step4_back:
+                        step3_number.setVisibility(View.VISIBLE) ;
+                        Chk = false ;
+                        break;
+
                 }
 
-                nextTurn();
+                if( Chk ) nextTurn();
 
             }
 
-        };
+        } ;
 
         step1_info.setOnClickListener(step1_O);
         step1_submission.setOnClickListener(step1_O);
@@ -940,14 +993,18 @@ public class InGameActivity extends AppCompatActivity {
 
         step2_left_player.setOnClickListener(step1_O) ;
         step2_right_player.setOnClickListener(step1_O) ;
+        step2_lr_back.setOnClickListener(step1_O) ;
+        step2_back.setOnClickListener(step1_O) ;
 
         step3_number_1.setOnClickListener(step_number) ;
         step3_number_2.setOnClickListener(step_number) ;
         step3_number_3.setOnClickListener(step_number) ;
         step3_number_4.setOnClickListener(step_number) ;
         step3_number_5.setOnClickListener(step_number) ;
+        step3_back.setOnClickListener(step_number) ;
         step4_color.setOnClickListener(step4_0);
         step4_number.setOnClickListener(step4_0);
+        step4_back.setOnClickListener(step4_0);
 
     }
 
