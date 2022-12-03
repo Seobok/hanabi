@@ -385,20 +385,26 @@ public class InGameActivity extends AppCompatActivity {
     public void drawCard(int playerID, int playerHand) {
         Random ranint = new Random();
 
-        int randCardID = ranint.nextInt(50);
-        while(!cardList[randCardID].position.equals("deck")) {
-            randCardID = ranint.nextInt(50);
+        if( card_count < 50 ) {
+
+            int randCardID = ranint.nextInt(50);
+            while (!cardList[randCardID].position.equals("deck")) {
+                randCardID = ranint.nextInt(50);
+            }
+
+            Hashtable<String, String> newCard = new Hashtable<>();
+            newCard.put("color", cardList[randCardID].color);
+            newCard.put("number", cardList[randCardID].number);
+            newCard.put("position", Integer.toString(playerID));
+            newCard.put("handPosition", Integer.toString(playerHand));
+            boardRef.child(Integer.toString(randCardID)).setValue(newCard);
+
+            cardList[randCardID].position = Integer.toString(playerID);
+            cardList[randCardID].handPosition = Integer.toString(playerHand);
         }
-
-        Hashtable<String,String> newCard = new Hashtable<>();
-        newCard.put("color",cardList[randCardID].color);
-        newCard.put("number",cardList[randCardID].number);
-        newCard.put("position", Integer.toString(playerID));
-        newCard.put("handPosition",Integer.toString(playerHand));
-        boardRef.child(Integer.toString(randCardID)).setValue(newCard);
-
-        cardList[randCardID].position = Integer.toString(playerID);
-        cardList[randCardID].handPosition = Integer.toString(playerHand);
+        else{
+            gameclearLayout.setVisibility( View.INVISIBLE ) ;
+        }
     }
 
     public static int getResId(String resName, Class<?> c) {
