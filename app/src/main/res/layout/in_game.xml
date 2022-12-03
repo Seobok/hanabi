@@ -1190,8 +1190,7 @@
         android:background="@drawable/ingame_background"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible"
-        >
+        android:visibility="visible">
 
 
         <LinearLayout

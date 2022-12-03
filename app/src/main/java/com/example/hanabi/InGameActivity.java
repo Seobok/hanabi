@@ -403,6 +403,11 @@ public class InGameActivity extends AppCompatActivity {
             cardList[randCardID].handPosition = Integer.toString(playerHand);
         }
         else{
+            int score = 0 ;
+            for( int i = 0 ; i < 5 ; i ++ )
+                score += score_deck[ i ].Number() ;
+            totalscoreTxt.setText(score);
+
             gameclearLayout.setVisibility( View.INVISIBLE ) ;
         }
     }
