@@ -141,7 +141,7 @@ public class InGameActivity extends AppCompatActivity {
 
             if( number == 4 ){
                 hint ++ ;
-                hint_text.setText( hint ) ;
+                hint_text.setText( String.valueOf(hint) ) ;
             }
 
             temp_string = color_array[ score_deck[ color ].Color() ] + score_deck[ color ].Number() ;
@@ -160,7 +160,7 @@ public class InGameActivity extends AppCompatActivity {
 
             if( now.handPosition.equals("1")){
                 hint ++ ;
-                hint_text.setText( hint ) ;
+                hint_text.setText( String.valueOf(hint) ) ;
             }
 
             int i = number_start ;
@@ -244,7 +244,7 @@ public class InGameActivity extends AppCompatActivity {
         hint -- ;
         int i ;
         Integer set_number = Integer.parseInt( cardList[ card_id ].number ) ;
-        hint_text.setText( hint ) ;
+        hint_text.setText( String.valueOf(hint) ) ;
 
         if( player_id == my_id ) for( i = 0 ; i < 5 ; i ++ ) { if( set_number == Integer.parseInt( cardList[ hand_card[ my_id ][ i ] ].number ) ) m_number[ i ].setText( set_number.toString() ) ; }
         else if( player_id == ( ( my_id ) + 1 ) % 3 ) for( i = 0 ; i < 5 ; i ++ ) { if( set_number == Integer.parseInt( cardList[ hand_card[ left_player ][ i ] ].number ) ) l_number[ i ].setText( set_number.toString() ) ;}
