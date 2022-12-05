@@ -385,7 +385,7 @@ public class InGameActivity extends AppCompatActivity {
     public void drawCard(int playerID, int playerHand) {
         Random ranint = new Random();
 
-        if( card_count < 50 ) {
+        if( card_count < 20 ) {
 
             int randCardID = ranint.nextInt(50);
             while (!cardList[randCardID].position.equals("deck")) {
