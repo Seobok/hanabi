@@ -139,7 +139,7 @@ public class InGameActivity extends AppCompatActivity {
 
             score_deck[ color ].Set( color , number );
 
-            if( number == 4 ){
+            if( number == 5 ){
                 hint ++ ;
                 hint_text.setText( String.valueOf(hint) ) ;
             }
@@ -259,7 +259,7 @@ public class InGameActivity extends AppCompatActivity {
         int i ;
         int set_color = Integer.parseInt( cardList[ card_id ].color ) ;
         hint -- ;
-        hint_text.setText( hint ) ;
+        hint_text.setText( String.valueOf(hint) ) ;
 
         if( player_id == my_id ){
 
@@ -403,12 +403,12 @@ public class InGameActivity extends AppCompatActivity {
             cardList[randCardID].handPosition = Integer.toString(playerHand);
         }
         else{
-            int score = 0 ;
-            for( int i = 0 ; i < 5 ; i ++ )
-                score += score_deck[ i ].Number() ;
-            totalscoreTxt.setText(score);
-
-            gameclearLayout.setVisibility( View.INVISIBLE ) ;
+            Hashtable<String,String> newLog = new Hashtable<>();
+            newLog.put("logType","clearGame");
+            newLog.put("hintUser","");
+            newLog.put("cardID", "");
+            newLog.put("hintType","");
+            logRef.setValue(newLog);
         }
     }
 
@@ -647,6 +647,15 @@ public class InGameActivity extends AppCompatActivity {
                         //TODO 내턴 시작
                         step1.setVisibility(View.VISIBLE);
                     }
+                }
+
+                else if(newLog.logType.equals("clearGame")) {
+                    int score = 0 ;
+                    for( int i = 0 ; i < 5 ; i ++ )
+                        score += score_deck[ i ].Number() ;
+                    totalscoreTxt.setText(String.valueOf(score));
+
+                    gameclearLayout.setVisibility( View.VISIBLE ) ;
                 }
             }
 
