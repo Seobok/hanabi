@@ -653,7 +653,7 @@ public class InGameActivity extends AppCompatActivity {
                     int score = 0 ;
                     for( int i = 0 ; i < 5 ; i ++ )
                         score += score_deck[ i ].Number() ;
-                    totalscoreTxt.setText(String.valueOf(score));
+                    totalscoreTxt.setText("총 점수 : " + String.valueOf(score));
 
                     gameclearLayout.setVisibility( View.VISIBLE ) ;
                 }
