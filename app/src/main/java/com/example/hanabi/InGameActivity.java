@@ -2,6 +2,7 @@ package com.example.hanabi;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
@@ -385,7 +386,7 @@ public class InGameActivity extends AppCompatActivity {
     public void drawCard(int playerID, int playerHand) {
         Random ranint = new Random();
 
-        if( card_count < 20 ) {
+        if( card_count < 50 ) {
 
             int randCardID = ranint.nextInt(50);
             while (!cardList[randCardID].position.equals("deck")) {

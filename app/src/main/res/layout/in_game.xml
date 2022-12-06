@@ -33,19 +33,19 @@
             android:id="@+id/step1_submission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="카드 제출"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step1_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="카드 정보"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -63,28 +63,28 @@
             android:id="@+id/step2_throw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="버리기"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step2_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="제출"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step2_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="뒤로가기"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -102,28 +102,28 @@
             android:id="@+id/step2_left_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="왼쪽"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step2_right_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="오른쪽"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step2_lr_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="뒤로가기"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -141,83 +141,86 @@
             android:id="@+id/step4_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="색"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step4_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="숫자"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step4_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="뒤로가기"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/step3_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="horizontal"
-        android:id="@+id/step3_number"
-        android:visibility="invisible"
-        >
+        android:visibility="invisible">
 
         <Button
             android:id="@+id/step3_number_1"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="1"
             android:layout_margin="5dp"
-            />
+            android:text="1"
+            android:textColor="@color/white" />
+
         <Button
             android:id="@+id/step3_number_2"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="2"
             android:layout_margin="5dp"
-            />
+            android:text="2"
+            android:textColor="@color/white" />
+
         <Button
             android:id="@+id/step3_number_3"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="3"
             android:layout_margin="5dp"
-            />
+            android:text="3"
+            android:textColor="@color/white" />
+
         <Button
             android:id="@+id/step3_number_4"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="4"
             android:layout_margin="5dp"
-            />
+            android:text="4"
+            android:textColor="@color/white" />
+
         <Button
             android:id="@+id/step3_number_5"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="5"
             android:layout_margin="5dp"
-            />
+            android:text="5"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/step3_back"
-            android:layout_width="50dp"
+            android:layout_width="106dp"
             android:layout_height="wrap_content"
-            android:text="1"
             android:layout_margin="5dp"
-            />
+            android:text="뒤로가기"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -242,8 +245,9 @@
                 android:layout_width="60dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
+                android:background="@drawable/card"
                 android:gravity="center"
-                android:background="@drawable/card" />
+                android:textColor="@android:color/holo_orange_light" />
 
             <ImageView
                 android:id="@+id/s1_image"
@@ -290,26 +294,29 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  Life ->     " />
+                android:text="  Life ->     "
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/life_text"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="3"
-                />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="   남은 힌트 수 ->    " />
+                android:text="   남은 힌트 수 ->    "
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/hint_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8" />
+                android:text="8"
+                android:textColor="@color/black" />
                 />
 
         </LinearLayout>
@@ -336,70 +343,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_1_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_1_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_2_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_2_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_3_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_3_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_4_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_4_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_green_5_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5" />
+                android:text="5"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -413,70 +430,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_1_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_1_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_2_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_2_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_3_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_3_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_4_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_4_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_red_5_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5" />
+                android:text="5"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -492,70 +519,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_1_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_1_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_2_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_2_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_3_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_3_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_4_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_4_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_white_5_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5" />
+                android:text="5"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -569,70 +606,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_1_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_1_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_2_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_2_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_3_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_3_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_4_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_4_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_blue_5_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5" />
+                android:text="5"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -646,70 +693,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_1_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_1_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_2_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_2_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_3_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_3_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_4_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_4_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/dump_y_5_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5" />
+                android:text="5"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 
@@ -746,7 +803,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
@@ -775,7 +833,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
@@ -804,7 +863,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
@@ -832,7 +892,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
@@ -861,7 +922,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
@@ -896,7 +958,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <ImageView
@@ -926,7 +989,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <ImageView
@@ -955,7 +1019,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
 
@@ -985,7 +1050,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <ImageView
@@ -1014,7 +1080,8 @@
                     android:layout_width="30dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <ImageView
@@ -1054,7 +1121,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="2" />
+                    android:text="2"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -1083,7 +1151,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="3" />
+                    android:text="3"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -1112,7 +1181,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="4" />
+                    android:text="4"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -1141,7 +1211,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="5" />
+                    android:text="5"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -1170,7 +1241,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="2" />
+                    android:text="2"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 

@@ -19,7 +19,7 @@
             android:id="@+id/mainLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@drawable/main_image" />
+            android:src="@drawable/main_image" />
     </LinearLayout>
 
     <LinearLayout
